@@ -21,7 +21,7 @@ public class SearchApiController {
     @GetMapping("/search")
     public List<QuestionAnswer> getSearch(@RequestParam String userInput){
 
-        List<QuestionAnswer> result = search.getBestMatched(userInput, QuestionType.ANSWER);
+        List<QuestionAnswer> result = search.getBestMatched(userInput, QuestionType.QUESTION);
         return result;
     }
 

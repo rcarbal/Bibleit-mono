@@ -6,5 +6,5 @@ import com.bibleit.bibleitmono.pojo.QuestionAnswer;
 import java.util.List;
 
 public interface SearchService {
-    List<QuestionAnswer> getBestMatched(String userInput, QuestionType answer);
+    List<QuestionAnswer> getBestMatched(String userInput, QuestionType type);
 }
