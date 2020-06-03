@@ -1,6 +1,4 @@
 let EVENT_LISTENER_RUNNING = false;
-const live_server = "https://bibleit.online";
-const test_server = "http://0.0.0.0:8000";
 
 function echoWord(){
     
@@ -69,7 +67,7 @@ $(document).ready(function() {
 
 function getPreviewQuestion(inputValue){
     //axios.get(`${live_server}/api/question_match?input=${inputValue}`)
-    axios.get(`/api/question_match?input=${inputValue}`)
+    axios.get(`/api/search?userInput=${inputValue}`)
     .then((response)=>{
 
     let count = 0;
