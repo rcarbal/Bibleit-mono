@@ -51,7 +51,6 @@ public class LevenshteinCompareImpl implements KeywordSimularityMatcher {
                 for (int y=0; y < splitFromUser.length; y++){
                     inputStingToCompare = userInput;
                     currentScore +=  getScoreByIndex(x, y);
-                    System.out.println();
                 }
             }
             // add to scoredArr
