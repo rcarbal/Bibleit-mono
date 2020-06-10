@@ -10,6 +10,7 @@ import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.bibleit.bibleitmono.pojo.QuestionAnswerImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -28,6 +29,7 @@ public class S3RemoteDataConnection implements RemoteDataConnection{
         return data;
     }
     @PostConstruct
+    @Scheduled(cron = "0 0 12 * * ?")
     private void setConnection() throws IOException {
 
         credentials = new BasicAWSCredentials(env.get("S3_ACCESS_ID"),env.get("S3_ACCESS_KEY"));

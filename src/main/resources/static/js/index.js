@@ -108,7 +108,9 @@ function getPreviewQuestion(inputValue) {
             }
 
             EVENT_LISTENER_RUNNING = false;
-        });
+        }).catch(function(error) {
+            EVENT_LISTENER_RUNNING = false;   // this is the part you need that catches 400 request
+          });
 }
 
 
@@ -149,7 +151,6 @@ function getQuestion(index) {
 
         answer.innerHTML = data.answer;
         bibleRef.innerHTML = data.verse;
-
         // })
     }
 }
