@@ -29,7 +29,7 @@ public class S3RemoteDataConnection implements RemoteDataConnection{
         return data;
     }
     @PostConstruct
-    @Scheduled(cron = "0 0 12 * * ?")
+    @Scheduled(cron = "0 0 0 * * ?")
     private void setConnection() throws IOException {
 
         credentials = new BasicAWSCredentials(env.get("S3_ACCESS_ID"),env.get("S3_ACCESS_KEY"));

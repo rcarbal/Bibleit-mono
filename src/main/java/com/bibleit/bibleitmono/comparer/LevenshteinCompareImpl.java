@@ -16,11 +16,12 @@ public class LevenshteinCompareImpl implements KeywordSimularityMatcher {
     private List<QuestionAnswer> scoredArr;
     private String[] splitFromUser;
     private double currentScore = 0.0;
-    private String dataStingToCompare;
+    private String dataStringFromArr;
     private QuestionAnswerImpl questionTemp = null;
     private String[] splitData;
     private String inputStingToCompare;
     private LevenshteinDistance distance = new LevenshteinDistance();
+    private String matchedString;
     @Autowired
     private KeywordSimularityMatcher keywordCompare;
 
@@ -34,9 +35,10 @@ public class LevenshteinCompareImpl implements KeywordSimularityMatcher {
 
         // loop throught all the data
         for (int i=0; i < array.length; i++){
+            matchedString = "";
             currentScore = 0.0;
             // get the current question as an array
-            dataStingToCompare = ((QuestionAnswerImpl)array[i]).getQuestion();
+            dataStringFromArr = ((QuestionAnswerImpl)array[i]).getQuestion();
             questionTemp = (QuestionAnswerImpl) array[i];
 
             if (questionTemp.getQuestion() == ""){
@@ -45,10 +47,10 @@ public class LevenshteinCompareImpl implements KeywordSimularityMatcher {
             splitData = questionTemp.getQuestion().split("\\s+");
 
 
-            for (int x = 0; x < splitData.length; x++){
+            for (int x = 0; x < splitFromUser.length; x++){
 
                 // parsing through all the indexes of users input
-                for (int y=0; y < splitFromUser.length; y++){
+                for (int y=0; y < splitData.length; y++){
                     inputStingToCompare = userInput;
                     currentScore +=  getScoreByIndex(x, y);
                 }
@@ -60,6 +62,7 @@ public class LevenshteinCompareImpl implements KeywordSimularityMatcher {
                 highestScore = currentScore;
             }
             if (currentScore > highestScore / 2){
+                question.setMatches(matchedString);
                 scoredArr.add(question);
             }
         }
@@ -71,10 +74,10 @@ public class LevenshteinCompareImpl implements KeywordSimularityMatcher {
         int returnedScore = 0;
 
         // remove "?"
-        String fromUser = splitFromUser[y].replace("?", "");
+        String fromUser = splitFromUser[x].replace("?", "");
         fromUser = fromUser.replace("\"", "");
         fromUser = fromUser.replace(".", "");
-        String fromData = splitData[x].replace("?", "");
+        String fromData = splitData[y].replace("?", "");
         fromData = fromData.replace("\"","");
         fromData = fromData.replace(".", "");
 
@@ -92,6 +95,9 @@ public class LevenshteinCompareImpl implements KeywordSimularityMatcher {
         // compare index of fromUser to from data
         double score = distance.apply(fromUser, fromData);
 
+        // use this bool to decide wether to add
+        boolean matched = false;
+
         if (score < 1.6){
             if (score == 0.0){
 
@@ -101,6 +107,7 @@ public class LevenshteinCompareImpl implements KeywordSimularityMatcher {
                 returnedScore += 10;
             }
             returnedScore += 2;
+            matched = true;
         }
 
         if (y == x && score <= 1){
@@ -109,6 +116,11 @@ public class LevenshteinCompareImpl implements KeywordSimularityMatcher {
                 returnedScore += 20;
             }
             returnedScore += 10;
+            matched = true;
+
+        }
+        if (matched){
+            matchedString = matchedString + fromUser + ":" + fromData + " " + ":" + returnedScore + " ";
         }
         return returnedScore;
     }

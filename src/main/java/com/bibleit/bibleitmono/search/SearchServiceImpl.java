@@ -28,9 +28,9 @@ public class SearchServiceImpl implements SearchService {
     @Override
     public List<QuestionAnswer> getBestMatched(String userInput, QuestionType type) {
         // get questions
-        QuestionAnswerImpl[] questionList = questionsRetrieveService.getAll();
+        QuestionAnswerImpl[] allQuestionList = questionsRetrieveService.getAll();
         //compare similar keywords
-        QuestionAnswer[] scoredQuestions = similarityMatcherService.getListOfScored(questionList, userInput, type);
+        QuestionAnswer[] scoredQuestions = similarityMatcherService.getListOfScored(allQuestionList, userInput, type);
         // Find Score for types of words
         QuestionAnswer[] sortedArr = algoService.sortUsingInput(scoredQuestions);
 
