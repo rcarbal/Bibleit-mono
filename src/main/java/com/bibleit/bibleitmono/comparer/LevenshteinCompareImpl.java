@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 @Component
@@ -47,6 +49,9 @@ public class LevenshteinCompareImpl implements KeywordSimularityMatcher {
             }
             splitData = questionTemp.getQuestion().split("\\s+");
 
+            // remove duplicates from the data
+            LinkedHashSet<String> linkedHashSet = new LinkedHashSet<>(Arrays.asList(splitData));
+            splitData = linkedHashSet.toArray(new String[] {});
 
             for (int x = 0; x < splitFromUser.length; x++){
 
