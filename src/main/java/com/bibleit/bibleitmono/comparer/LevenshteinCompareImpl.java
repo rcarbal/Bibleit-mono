@@ -28,6 +28,7 @@ public class LevenshteinCompareImpl implements KeywordSimularityMatcher {
 
     @Override
     public QuestionAnswer[] getListOfScored(QuestionAnswer[] array, String userInput, QuestionType type) {
+
         double highestScore = 0.0;
         // set split for user input
         scoredArr = new ArrayList<>();
@@ -93,7 +94,7 @@ public class LevenshteinCompareImpl implements KeywordSimularityMatcher {
 
 
         // compare index of fromUser to from data
-        double score = distance.apply(fromUser, fromData);
+        double score = distance.apply(fromUser.toLowerCase(), fromData.toLowerCase());
 
         // use this bool to decide wether to add
         boolean matched = false;
@@ -102,9 +103,9 @@ public class LevenshteinCompareImpl implements KeywordSimularityMatcher {
             if (score == 0.0){
 
                 if (checkUser && checkData){
-                    returnedScore += 15;
+                    returnedScore += 30;
                 }
-                returnedScore += 10;
+                returnedScore += 45;
             }
             returnedScore += 2;
             matched = true;
@@ -113,9 +114,9 @@ public class LevenshteinCompareImpl implements KeywordSimularityMatcher {
         if (y == x && score <= 1){
 
             if (y == 0.0 && score < 1){
-                returnedScore += 20;
+                returnedScore += 30;
             }
-            returnedScore += 10;
+            returnedScore += 5;
             matched = true;
 
         }
