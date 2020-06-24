@@ -7,6 +7,7 @@ import com.bibleit.bibleitmono.pojo.QuestionAnswerImpl;
 import com.bibleit.bibleitmono.question.QuestionRetrievalService;
 import com.bibleit.bibleitmono.remover.ElementRemover;
 import com.bibleit.bibleitmono.sorting.AlgorithmService;
+import com.bibleit.bibleitmono.utils.VerseExtractor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +25,8 @@ public class SearchServiceImpl implements SearchService {
     private AlgorithmService algoService;
     @Autowired
     private ElementRemover remover;
+    @Autowired
+    private VerseExtractor verseExtractor;
 
     @Override
     public List<QuestionAnswer> getBestMatched(String userInput, QuestionType type) {
@@ -38,6 +41,8 @@ public class SearchServiceImpl implements SearchService {
         int removeAmount = 10;
         List<QuestionAnswer> finalQuestions = remover.removeFromList(Arrays.asList(sortedArr), removeAmount);
 
+        // add verses
+        List<QuestionAnswer> questionsWithVerses = verseExtractor.getVerses(finalQuestions);
         return finalQuestions;
     }
 }

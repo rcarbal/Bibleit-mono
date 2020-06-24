@@ -40,6 +40,11 @@ public class BibleJSONDaoImpl implements BibleJSONDao {
         return parser.getBook(bookName, parsedBibleJSON);
     }
 
+    @Override
+    public String getVerse(String book, String chapter, String verse) {
+        return parser.getVerse(book, chapter, verse, parsedBibleJSON);
+    }
+
 
     public void setupScriptureCollection() {
 

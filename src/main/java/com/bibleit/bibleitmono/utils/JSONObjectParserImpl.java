@@ -25,4 +25,11 @@ public class JSONObjectParserImpl implements JSONObjectParser {
         JSONObject extractedBook = (JSONObject) parsedBibleJSON.get(book);
         return extractedBook;
     }
+
+    @Override
+    public String getVerse(String book, String chapter, String verse, JSONObject parsedBibleJSON) {
+        JSONObject extractedBook = (JSONObject) parsedBibleJSON.get(book);
+        Object extractedChapter = parsedBibleJSON.get(chapter);
+        return null;
+    }
 }
