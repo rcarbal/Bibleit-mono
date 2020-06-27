@@ -20,24 +20,28 @@ public class VerseExtractorImpl implements VerseExtractor{
 
         for (QuestionAnswer question : finalQuestions){
             // get the verses
-            xVerses = question.getVerses();
-            getVersesInfoFromArray();
-            continue;
+            question.getVerses();
+
+            // loop through all the verse
+            getVersesInfoFromArray(question.getVerses());
+
         }
+
+        // return new List with all the verses already available.
         return null;
     }
 
-    private Object getVersesInfoFromArray(){
+    private Object getVersesInfoFromArray(String[] question){
 
-        if (xVerses == null){
+        if (question == null){
             return null;
         }
 
         //loop through the xVerses array
-        for (String x : xVerses){
+        for (String x : question){
             if (x.contains("-")){
 
-                String[] arrayOfVerseArr = x.split("-");
+                String[] splitSingleVersesStringArr = x.split("-");
                 int index = 0;
                 String book = null;
                 String chapter = null;
@@ -45,7 +49,7 @@ public class VerseExtractorImpl implements VerseExtractor{
                 String endVerse = null;
 
                 // loop through the range of verses EXAMPLE: Book Chapter:Verse-Book Chapter:Verse
-                for (String y : arrayOfVerseArr){
+                for (String y : splitSingleVersesStringArr){
 
                     String trimmed = y.trim();
                     if (index == 0){
@@ -61,18 +65,11 @@ public class VerseExtractorImpl implements VerseExtractor{
                     index++;
                 }
 
-                // all the information has been extracted add it to the versesArrInfo
-                versesArrInfo = new String[4];
+                doa.getVerses(book, chapter, startVerse, endVerse);
 
-                versesArrInfo[0] = book;
-                versesArrInfo[1] = chapter;
-                versesArrInfo[2] = startVerse;
-                versesArrInfo[3] = endVerse;
-
-                // TODO the function ends here, and nothing is fone with the verse String[]
             }
         }
 
-        return null;
+        return "null";
     }
 }

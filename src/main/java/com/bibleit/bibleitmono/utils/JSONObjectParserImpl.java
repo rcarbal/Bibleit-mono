@@ -4,6 +4,9 @@ import com.bibleit.bibleitmono.enums.BibleBooks;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class JSONObjectParserImpl implements JSONObjectParser {
 
@@ -32,4 +35,44 @@ public class JSONObjectParserImpl implements JSONObjectParser {
         Object extractedChapter = parsedBibleJSON.get(chapter);
         return null;
     }
+
+    @Override
+    public JSONObjectParser getVerses(String book, String chapter, String startVerse, String endVerse, JSONObject parsedBibleJSON) {
+
+        List<String> verses = new ArrayList<>();
+
+        // make sure the verse string is equivalent to Integer
+        try {
+            Integer.parseInt(startVerse);
+        }
+        catch (NumberFormatException e){
+            System.out.println(e);
+            return null;
+        }
+
+        try {
+            Integer.parseInt(endVerse);
+        }
+        catch (NumberFormatException e){
+            System.out.println(e);
+            return null;
+        }
+
+        for (int i=Integer.parseInt(startVerse); i < Integer.parseInt(endVerse); i++ ){
+            JSONObject extractedBook = (JSONObject) parsedBibleJSON.get(book);
+            JSONObject extractedChapter = (JSONObject) extractedBook.get(chapter);
+
+            // get verse
+            String verse = (String) extractedChapter.get(String.valueOf(i));
+            if (verse ==  null){
+                continue;
+            }
+            
+            verses.add(verse);
+        }
+
+        return null;
+    }
+
+
 }
