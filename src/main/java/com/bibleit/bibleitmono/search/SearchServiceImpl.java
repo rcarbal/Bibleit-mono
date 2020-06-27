@@ -41,8 +41,8 @@ public class SearchServiceImpl implements SearchService {
         int removeAmount = 10;
         List<QuestionAnswer> finalQuestions = remover.removeFromList(Arrays.asList(sortedArr), removeAmount);
 
-        // add verses
+        // add verses to the QuestionAnswer POJO
         List<QuestionAnswer> questionsWithVerses = verseExtractor.getVerses(finalQuestions);
-        return finalQuestions;
+        return questionsWithVerses;
     }
 }

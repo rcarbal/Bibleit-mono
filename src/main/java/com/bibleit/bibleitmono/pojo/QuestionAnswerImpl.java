@@ -1,6 +1,5 @@
 package com.bibleit.bibleitmono.pojo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionAnswerImpl implements QuestionAnswer, Comparable<QuestionAnswerImpl> {
@@ -13,7 +12,7 @@ public class QuestionAnswerImpl implements QuestionAnswer, Comparable<QuestionAn
     private String keywords;
     private double score;
     private String matches;
-    private List<Verses> verses = new ArrayList<>();
+    private List<Verses> verses;
 
     public QuestionAnswerImpl() {
     }
@@ -35,13 +34,12 @@ public class QuestionAnswerImpl implements QuestionAnswer, Comparable<QuestionAn
     }
 
     public String getVerse() {
-        return verse;
+        return this.verse;
     }
 
     public void setVerse(String verse) {
         this.verse = verse;
     }
-
     public String getNote() {
         return note;
     }
@@ -63,8 +61,12 @@ public class QuestionAnswerImpl implements QuestionAnswer, Comparable<QuestionAn
     }
 
     @Override
-    public void setVerses() {
+    public void setVersesList(List<Verses> verses) {
+        this.verses = verses;
+    }
 
+    public List<Verses> getVersesList(){
+        return this.verses;
     }
 
     @Override

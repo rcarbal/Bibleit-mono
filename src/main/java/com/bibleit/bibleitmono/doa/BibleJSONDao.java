@@ -1,7 +1,7 @@
 package com.bibleit.bibleitmono.doa;
 
 
-import com.bibleit.bibleitmono.utils.JSONObjectParser;
+import com.bibleit.bibleitmono.pojo.Verses;
 import org.json.simple.JSONObject;
 
 public interface BibleJSONDao {
@@ -10,5 +10,5 @@ public interface BibleJSONDao {
     JSONObject getBook(String bookName);
     String getVerse(String book, String chapter, String verse);
 
-    JSONObjectParser getVerses(String book, String chapter, String startVerse, String endVerse);
+    Verses getVerses(String book, String chapter, String startVerse, String endVerse);
 }

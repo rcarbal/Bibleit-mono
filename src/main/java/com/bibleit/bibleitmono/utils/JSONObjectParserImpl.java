@@ -1,6 +1,7 @@
 package com.bibleit.bibleitmono.utils;
 
 import com.bibleit.bibleitmono.enums.BibleBooks;
+import com.bibleit.bibleitmono.pojo.Verses;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Component;
 
@@ -37,7 +38,7 @@ public class JSONObjectParserImpl implements JSONObjectParser {
     }
 
     @Override
-    public JSONObjectParser getVerses(String book, String chapter, String startVerse, String endVerse, JSONObject parsedBibleJSON) {
+    public Verses getVerses(String book, String chapter, String startVerse, String endVerse, JSONObject parsedBibleJSON) {
 
         List<String> verses = new ArrayList<>();
 
@@ -58,7 +59,7 @@ public class JSONObjectParserImpl implements JSONObjectParser {
             return null;
         }
 
-        for (int i=Integer.parseInt(startVerse); i < Integer.parseInt(endVerse); i++ ){
+        for (int i=Integer.parseInt(startVerse); i <= Integer.parseInt(endVerse); i++ ){
             JSONObject extractedBook = (JSONObject) parsedBibleJSON.get(book);
             JSONObject extractedChapter = (JSONObject) extractedBook.get(chapter);
 
@@ -71,7 +72,10 @@ public class JSONObjectParserImpl implements JSONObjectParser {
             verses.add(verse);
         }
 
-        return null;
+        Verses rangeOfVerses = new Verses();
+        rangeOfVerses.setVerses(verses);
+
+        return rangeOfVerses;
     }
 
 

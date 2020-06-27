@@ -24,5 +24,4 @@ public class SearchApiController {
         List<QuestionAnswer> result = search.getBestMatched(userInput, QuestionType.QUESTION);
         return result;
     }
-
 }
