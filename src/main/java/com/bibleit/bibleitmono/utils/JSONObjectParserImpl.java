@@ -31,10 +31,31 @@ public class JSONObjectParserImpl implements JSONObjectParser {
     }
 
     @Override
-    public String getVerse(String book, String chapter, String verse, JSONObject parsedBibleJSON) {
+    public Verses getVerse(String book, String chapter, String verse, JSONObject parsedBibleJSON) {
+        List<String> versesList = new ArrayList<>();
+        Verses singleVerse = new Verses();
+
+        try {
+            Integer.parseInt(verse);
+        }
+        catch (NumberFormatException e){
+            System.out.println(e);
+            System.out.println("Inside getVerse() JSONObjectParserImpl: " + verse);
+            return null;
+        }
+
         JSONObject extractedBook = (JSONObject) parsedBibleJSON.get(book);
-        Object extractedChapter = parsedBibleJSON.get(chapter);
-        return null;
+        JSONObject extractedChapter = (JSONObject) extractedBook.get(chapter);
+
+        // get verse
+        String extractedVerse = (String) extractedChapter.get(String.valueOf(verse));
+        if (extractedVerse ==  null){
+            return null;
+        }
+
+        versesList.add(extractedVerse);
+        singleVerse.setVerses(versesList);
+        return singleVerse;
     }
 
     @Override
@@ -48,6 +69,7 @@ public class JSONObjectParserImpl implements JSONObjectParser {
         }
         catch (NumberFormatException e){
             System.out.println(e);
+            System.out.println("Inside getVerses() JSONObjectParserImpl: "+ startVerse);
             return null;
         }
 
@@ -56,6 +78,7 @@ public class JSONObjectParserImpl implements JSONObjectParser {
         }
         catch (NumberFormatException e){
             System.out.println(e);
+            System.out.println("Inside getVerses() JSONObjectParserImpl: "+ endVerse);
             return null;
         }
 

@@ -42,7 +42,7 @@ public class BibleJSONDaoImpl implements BibleJSONDao {
     }
 
     @Override
-    public String getVerse(String book, String chapter, String verse) {
+    public Verses getVerse(String book, String chapter, String verse) {
         return parser.getVerse(book, chapter, verse, parsedBibleJSON);
     }
 
