@@ -3,15 +3,15 @@ package com.bibleit.bibleitmono.pojo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Verses {
+public class VersesContainer {
 
-    List<String> verses = new ArrayList<>();
+    List<Verse> verses = new ArrayList<>();
 
-    public List<String> getVerses() {
+    public List<Verse> getVerses() {
         return verses;
     }
 
-    public void setVerses(List<String> verses) {
+    public void setVerses(List<Verse> verses) {
         this.verses = verses;
     }
 

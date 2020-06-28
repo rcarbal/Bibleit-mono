@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface QuestionAnswer {
     double getScore();
-    void setVersesList(List<Verses> verses);
+    void setVersesList(List<VersesContainer> verses);
 
     String[] getVerses();
 }

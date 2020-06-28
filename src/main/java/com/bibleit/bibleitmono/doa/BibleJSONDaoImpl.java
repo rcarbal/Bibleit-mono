@@ -1,6 +1,6 @@
 package com.bibleit.bibleitmono.doa;
 
-import com.bibleit.bibleitmono.pojo.Verses;
+import com.bibleit.bibleitmono.pojo.VersesContainer;
 import com.bibleit.bibleitmono.utils.JSONObjectParser;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -42,12 +42,12 @@ public class BibleJSONDaoImpl implements BibleJSONDao {
     }
 
     @Override
-    public Verses getVerse(String book, String chapter, String verse) {
+    public VersesContainer getVerse(String book, String chapter, String verse) {
         return parser.getVerse(book, chapter, verse, parsedBibleJSON);
     }
 
     @Override
-    public Verses getVerses(String book, String chapter, String startVerse, String endVerse) {
+    public VersesContainer getVerses(String book, String chapter, String startVerse, String endVerse) {
         return parser.getVerses(book, chapter, startVerse, endVerse, parsedBibleJSON);
     }
 

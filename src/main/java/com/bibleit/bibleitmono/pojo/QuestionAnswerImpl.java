@@ -12,7 +12,7 @@ public class QuestionAnswerImpl implements QuestionAnswer, Comparable<QuestionAn
     private String keywords;
     private double score;
     private String matches;
-    private List<Verses> verses;
+    private List<VersesContainer> verses;
 
     public QuestionAnswerImpl() {
     }
@@ -61,11 +61,11 @@ public class QuestionAnswerImpl implements QuestionAnswer, Comparable<QuestionAn
     }
 
     @Override
-    public void setVersesList(List<Verses> verses) {
+    public void setVersesList(List<VersesContainer> verses) {
         this.verses = verses;
     }
 
-    public List<Verses> getVersesList(){
+    public List<VersesContainer> getVersesList(){
         return this.verses;
     }
 

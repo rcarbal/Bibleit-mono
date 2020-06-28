@@ -1,7 +1,8 @@
 package com.bibleit.bibleitmono.utils;
 
 import com.bibleit.bibleitmono.enums.BibleBooks;
-import com.bibleit.bibleitmono.pojo.Verses;
+import com.bibleit.bibleitmono.pojo.Verse;
+import com.bibleit.bibleitmono.pojo.VersesContainer;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Component;
 
@@ -31,9 +32,9 @@ public class JSONObjectParserImpl implements JSONObjectParser {
     }
 
     @Override
-    public Verses getVerse(String book, String chapter, String verse, JSONObject parsedBibleJSON) {
-        List<String> versesList = new ArrayList<>();
-        Verses singleVerse = new Verses();
+    public VersesContainer getVerse(String book, String chapter, String verse, JSONObject parsedBibleJSON) {
+        List<Verse> verseList = new ArrayList<>();
+        VersesContainer singleVerse = new VersesContainer();
 
         try {
             Integer.parseInt(verse);
@@ -53,15 +54,26 @@ public class JSONObjectParserImpl implements JSONObjectParser {
             return null;
         }
 
-        versesList.add(extractedVerse);
-        singleVerse.setVerses(versesList);
+        String bibleLocationData = book + " " + chapter + ":" + verse;
+        // set the verseInfo data
+        Verse verseText = new Verse();
+        verseText.setVerse(extractedVerse);
+        verseText.setBibleLocation(bibleLocationData);
+
+        // Add the text and bible data Verse POJO to the List<Verse>
+        verseList.add(verseText);
+
+        // Add POJO of Verse to the VerseContainer
+        singleVerse.setVerses(verseList);
+
+        //return the VerseContainer
         return singleVerse;
     }
 
     @Override
-    public Verses getVerses(String book, String chapter, String startVerse, String endVerse, JSONObject parsedBibleJSON) {
+    public VersesContainer getVerses(String book, String chapter, String startVerse, String endVerse, JSONObject parsedBibleJSON) {
 
-        List<String> verses = new ArrayList<>();
+        List<Verse> verses = new ArrayList<>();
 
         // make sure the verse string is equivalent to Integer
         try {
@@ -91,11 +103,18 @@ public class JSONObjectParserImpl implements JSONObjectParser {
             if (verse ==  null){
                 continue;
             }
-            
-            verses.add(verse);
+
+            String bibleLocationData = book + " " + chapter + ":" + i;
+
+            // add verse text to container that will hold the verse information
+            Verse verseInfo = new Verse();
+            verseInfo.setVerse(verse);
+            verseInfo.setBibleLocation(bibleLocationData);
+
+            verses.add(verseInfo);
         }
 
-        Verses rangeOfVerses = new Verses();
+        VersesContainer rangeOfVerses = new VersesContainer();
         rangeOfVerses.setVerses(verses);
 
         return rangeOfVerses;

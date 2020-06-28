@@ -2,7 +2,7 @@ package com.bibleit.bibleitmono.utils;
 
 import com.bibleit.bibleitmono.doa.BibleJSONDao;
 import com.bibleit.bibleitmono.pojo.QuestionAnswer;
-import com.bibleit.bibleitmono.pojo.Verses;
+import com.bibleit.bibleitmono.pojo.VersesContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +21,7 @@ public class VerseExtractorImpl implements VerseExtractor{
 
         for (QuestionAnswer question : finalQuestions){
             // loop through all the verse
-            List<Verses> verses =  getVersesInfoFromArray(question.getVerses());
+            List<VersesContainer> verses =  getVersesInfoFromArray(question.getVerses());
             question.setVersesList(verses);
 
         }
@@ -30,14 +30,14 @@ public class VerseExtractorImpl implements VerseExtractor{
         return finalQuestions;
     }
 
-    private List<Verses> getVersesInfoFromArray(String[] questions){
+    private List<VersesContainer> getVersesInfoFromArray(String[] questions){
 
         if (questions == null){
             return null;
         }
 
         // the main returned List<Verses>
-        List<Verses> mainArr = new ArrayList<>();
+        List<VersesContainer> mainArr = new ArrayList<>();
 
         //loop through the xVerses array
         for (String x : questions){
@@ -90,7 +90,7 @@ public class VerseExtractorImpl implements VerseExtractor{
                 }
 
                 // get the verses of a range
-                Verses rangeOfVerse = doa.getVerses(book, chapter, startVerse, endVerse);
+                VersesContainer rangeOfVerse = doa.getVerses(book, chapter, startVerse, endVerse);
 
                 // add the rangeOfVerses to List<Verses>
                 mainArr.add(rangeOfVerse);
@@ -114,7 +114,7 @@ public class VerseExtractorImpl implements VerseExtractor{
                     System.out.println("Verse" + startVerse);
                     continue;
                 }
-                Verses singleVerse = doa.getVerse(book, chapter, startVerse);
+                VersesContainer singleVerse = doa.getVerse(book, chapter, startVerse);
                 mainArr.add(singleVerse);
 
             }
