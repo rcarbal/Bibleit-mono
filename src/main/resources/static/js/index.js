@@ -6,6 +6,7 @@ let previewDiv = document.getElementById('previewDiv');
 let answerCard = document.getElementById('answerCard');
 let answer = document.getElementById('cardAnswer');
 let bibleRef = document.getElementById('cardBibleRef');
+let container = document.getElementById('mainContainer');
 
 function echoWord() {
 
@@ -141,6 +142,19 @@ function getQuestion(index) {
             previewDiv.innerHTML = "";
         }
         let data = currentResponseData[index]
+        
+        // get verses 
+        data.versesList.forEach((verseInfo)=>{
+
+            verseInfo.verses.forEach((info)=> {
+
+                // add verses info
+                // TODO add this to card div
+                let verseDiv = document.createElement('div');
+                verseDiv.innerHTML = info['bibleLocation'];
+                container.appendChild(verseDiv);
+            });
+        });
 
 
 
