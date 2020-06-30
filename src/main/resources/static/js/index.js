@@ -156,6 +156,7 @@ function getQuestion(index) {
             let card = document.createElement('div');
             card.classList.add('card');
             card.classList.add('pt-1');
+            card.classList.add('mb-1');
 
             let cardBody = document.createElement('div');
             cardBody.classList.add('card-body');
@@ -172,11 +173,12 @@ function getQuestion(index) {
                 verseTitle.classList.add("card-text");
 
                 let verseFooter = document.createElement('div')
-                verseFooter.classList.add('blockquote-footer')
+                verseFooter.classList.add('card-title')
                 verseFooter.innerHTML = info['bibleLocation']
 
-                cardBody.appendChild(verseTitle);
                 cardBody.appendChild(verseFooter);
+                cardBody.appendChild(verseTitle);
+                
             });
         });
 
