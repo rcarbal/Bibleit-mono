@@ -6,7 +6,10 @@ let previewDiv = document.getElementById('previewDiv');
 let answerCard = document.getElementById('answerCard');
 let answer = document.getElementById('cardAnswer');
 let bibleRef = document.getElementById('cardBibleRef');
+bibleRef.style.visibility = 'hidden';
+
 let container = document.getElementById('mainContainer');
+let cardContainer = document.getElementById('cardContainer');
 
 function echoWord() {
 
@@ -142,17 +145,38 @@ function getQuestion(index) {
             previewDiv.innerHTML = "";
         }
         let data = currentResponseData[index]
+
+        //clear cardContaienr
+        cardContainer.innerHTML = "";
         
         // get verses 
         data.versesList.forEach((verseInfo)=>{
 
+            // set card
+            let card = document.createElement('div');
+            card.classList.add('card');
+            card.classList.add('pt-1');
+
+            let cardBody = document.createElement('div');
+            cardBody.classList.add('card-body');
+
+            card.appendChild(cardBody);
+            cardContainer.appendChild(card);
+
             verseInfo.verses.forEach((info)=> {
 
                 // add verses info
-                // TODO add this to card div
-                let verseDiv = document.createElement('div');
-                verseDiv.innerHTML = info['bibleLocation'];
-                container.appendChild(verseDiv);
+                let verseTitle = document.createElement('div');
+                verseTitle.innerHTML = info['verse'];
+                verseTitle.classList.add("pt-2");
+                verseTitle.classList.add("card-text");
+
+                let verseFooter = document.createElement('div')
+                verseFooter.classList.add('blockquote-footer')
+                verseFooter.innerHTML = info['bibleLocation']
+
+                cardBody.appendChild(verseTitle);
+                cardBody.appendChild(verseFooter);
             });
         });
 
@@ -164,7 +188,7 @@ function getQuestion(index) {
         bibleRef.innerHTML = "";
 
         answer.innerHTML = data.answer;
-        bibleRef.innerHTML = data.verse;
+        // bibleRef.innerHTML = data.verse;
         // })
     }
 }
