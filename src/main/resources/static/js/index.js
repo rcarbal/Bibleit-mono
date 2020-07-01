@@ -158,26 +158,48 @@ function getQuestion(index) {
             card.classList.add('pt-1');
             card.classList.add('mb-1');
 
+            let cardHeader = document.createElement('div');
+            cardHeader.classList.add('card-header');
+
             let cardBody = document.createElement('div');
             cardBody.classList.add('card-body');
 
+            card.appendChild(cardHeader);
             card.appendChild(cardBody);
             cardContainer.appendChild(card);
 
+            let index = 0;
+            
+
             verseInfo.verses.forEach((info)=> {
 
-                // add verses info
-                let verseTitle = document.createElement('div');
-                verseTitle.innerHTML = info['verse'];
-                verseTitle.classList.add("pt-2");
-                verseTitle.classList.add("card-text");
+                // set header
+                if (index == 0){
+                    cardHeader.innerHTML = `${info['book']} ${info['chapter']}`
+                }
 
-                let verseFooter = document.createElement('div')
-                verseFooter.classList.add('card-title')
-                verseFooter.innerHTML = info['bibleLocation']
+                let verseContainer = document.createElement('div');
+                verseContainer.classList.add('list-inline')
 
-                cardBody.appendChild(verseFooter);
-                cardBody.appendChild(verseTitle);
+                // set verse number superscript
+                let supSpan = document.createElement('span');
+
+                let verseSup = document.createElement('sup');
+                verseSup.innerHTML = info['verseNumber']
+                verseSup.classList.add('font-weight-bold');
+                supSpan.appendChild(verseSup);
+
+                // set verses
+                let verseText = document.createElement('span');
+                verseText.innerHTML = info['verse'];
+
+                verseContainer.appendChild(supSpan);
+                verseContainer.appendChild(verseText);
+                verseContainer.classList.add('mb-3');
+
+                cardBody.appendChild(verseContainer);
+                
+                index++
                 
             });
         });

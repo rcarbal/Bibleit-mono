@@ -57,8 +57,11 @@ public class JSONObjectParserImpl implements JSONObjectParser {
         String bibleLocationData = book + " " + chapter + ":" + verse;
         // set the verseInfo data
         Verse verseText = new Verse();
+
         verseText.setVerse(extractedVerse);
-        verseText.setBibleLocation(bibleLocationData);
+        verseText.setBook(book);
+        verseText.setChapter(chapter);
+        verseText.setVerseNumber(verse);
 
         // Add the text and bible data Verse POJO to the List<Verse>
         verseList.add(verseText);
@@ -108,8 +111,11 @@ public class JSONObjectParserImpl implements JSONObjectParser {
 
             // add verse text to container that will hold the verse information
             Verse verseInfo = new Verse();
+
             verseInfo.setVerse(verse);
-            verseInfo.setBibleLocation(bibleLocationData);
+            verseInfo.setBook(book);
+            verseInfo.setChapter(chapter);
+            verseInfo.setVerseNumber(String.valueOf(i));
 
             verses.add(verseInfo);
         }
