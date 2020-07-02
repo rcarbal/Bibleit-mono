@@ -32,10 +32,84 @@ public class VerseExtractorImpl implements VerseExtractor{
     }
 
     @Override
-    public Verse getVerse(String verseLocation) {
-        return null;
-    }
+    public Verse getVerseLocationParams(String verseLocation) {
 
+        Verse returnedVerse = new Verse();
+
+        String book = null;
+        String chapter = null;
+        String startVerse = null;
+        String endVerse = null;
+
+        if (verseLocation.contains("-")){
+
+            // create an array for the range of verses
+            String[] splitSingleVersesStringArr = verseLocation.split("-");
+            int index = 0;
+
+            // loop through the range of verses EXAMPLE: Book Chapter:Verse-Book Chapter:Verse
+            for (String y : splitSingleVersesStringArr){
+
+                String trimmed = y.trim();
+                if (index == 0){
+
+                    try {
+                        book = trimmed.split(" ")[0];
+                        char chapterChar = trimmed.split(" ")[1].charAt(0);
+                        chapter = Character.toString(chapterChar);
+                        startVerse = trimmed.split(" ")[1].split(":")[1];
+                    }
+                    catch (Exception e){
+                        System.out.println(e);
+                        System.out.println("Inside getVersesInfoFromArray() VerseExtractorImpl: book, chapter, " +
+                                "startVerse");
+                        continue;
+                    }
+
+                }
+                else {
+                    try {
+                        endVerse = trimmed.split(" ")[1].split(":")[1];
+                    }
+                    catch (Exception e){
+                        System.out.println(e);
+                        System.out.println("Inside getVersesInfoFromArray() VerseExtractorImpl: "+ endVerse);
+                        continue;
+                    }
+
+                }
+
+                index++;
+            }
+
+            returnedVerse.setBook(book);
+            returnedVerse.setChapter(chapter);
+            returnedVerse.setVerseNumber(startVerse);
+        }
+        // else if not range of verses
+        else {
+            String trimmedX = verseLocation.trim();
+            try {
+                book = trimmedX.split(" ")[0];
+                char chapterChar = trimmedX.split(" ")[1].charAt(0);
+                chapter = Character.toString(chapterChar);
+                startVerse = trimmedX.split(" ")[1].split(":")[1];
+            }
+            catch (Exception e){
+                System.out.println(e);
+                System.out.println("Inside getVersesInfoFromArray() VerseExtractorImpl: book, chapter, " +
+                        "startVerse for none range verse : else {}");
+                System.out.println(trimmedX);
+                System.out.println("Book: " + book);
+                System.out.println("Chapter:" + chapter);
+                System.out.println("Verse" + startVerse);
+            }
+            returnedVerse.setBook(book);
+            returnedVerse.setChapter(chapter);
+            returnedVerse.setVerseNumber(startVerse);
+        }
+        return returnedVerse;
+    }
     private List<VersesContainer> getVersesInfoFromArray(String[] questions){
 
         if (questions == null){

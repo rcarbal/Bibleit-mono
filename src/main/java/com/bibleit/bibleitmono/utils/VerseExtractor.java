@@ -8,5 +8,5 @@ import java.util.List;
 public interface VerseExtractor {
     List<QuestionAnswer> getVerses(List<QuestionAnswer> finalQuestions);
 
-    Verse getVerse(String verseLocation);
+    Verse getVerseLocationParams(String verseLocation);
 }

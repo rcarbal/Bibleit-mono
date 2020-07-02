@@ -65,6 +65,11 @@ public class QuestionAnswerImpl implements QuestionAnswer, Comparable<QuestionAn
         this.verses = verses;
     }
 
+    @Override
+    public int getId() {
+        return id;
+    }
+
     public List<VersesContainer> getVersesList(){
         return this.verses;
     }
@@ -86,9 +91,6 @@ public class QuestionAnswerImpl implements QuestionAnswer, Comparable<QuestionAn
         this.matches = matches;
     }
 
-    public int getId() {
-        return id;
-    }
 
     public void setId(int id) {
         this.id = id;

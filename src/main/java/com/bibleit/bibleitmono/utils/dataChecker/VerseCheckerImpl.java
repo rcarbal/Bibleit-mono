@@ -33,7 +33,13 @@ public class VerseCheckerImpl implements VerseChecker{
 
             // loop through array of verse locations
             for (String verseLocation : verses){
-                Verse versePojo = verseExtractor.getVerse(verseLocation);
+                Verse versePojo = verseExtractor.getVerseLocationParams(verseLocation);
+
+                if (versePojo.getBook() == null ||
+                        versePojo.getChapter() == null ||
+                        versePojo.getVerseNumber() == null){
+                    listOfBadVerses.add(questionAnswer.getId());
+                }
             }
         }
 
