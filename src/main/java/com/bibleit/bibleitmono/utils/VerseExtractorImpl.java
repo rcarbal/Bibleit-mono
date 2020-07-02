@@ -2,6 +2,7 @@ package com.bibleit.bibleitmono.utils;
 
 import com.bibleit.bibleitmono.doa.BibleJSONDao;
 import com.bibleit.bibleitmono.pojo.QuestionAnswer;
+import com.bibleit.bibleitmono.pojo.Verse;
 import com.bibleit.bibleitmono.pojo.VersesContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,6 +29,11 @@ public class VerseExtractorImpl implements VerseExtractor{
 
         // return new List with all the verses already available.
         return finalQuestions;
+    }
+
+    @Override
+    public Verse getVerse(String verseLocation) {
+        return null;
     }
 
     private List<VersesContainer> getVersesInfoFromArray(String[] questions){
