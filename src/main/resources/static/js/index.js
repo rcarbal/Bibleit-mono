@@ -52,30 +52,32 @@ $(document).ready(function () {
         // event.stopPropagation();
         const index = event.target.dataset.index;
 
-        const question = event.target.innerHTML;
+        if (typeof index !== "undefined"){
+            const question = event.target.innerHTML;
 
-        // get search and set search bar
-        const search = document.getElementById('searchInput');
-        search.value = question;
+            // get search and set search bar
+            const search = document.getElementById('searchInput');
+            search.value = question;
+    
+            // hide the preview div
+            let previewShouldHave = previewDiv.classList.contains("show_pre");
+            if (previewShouldHave) {
+                previewDiv.classList.remove("show_pre");
+            }
+    
+            // remove preview dive child nodes
+            if (previewDiv.hasChildNodes()) {
+                previewDiv.innerHTML = "";
+            }
+    
+            // hide preview div
+            if (question.split(" ").length) {
+                previewDiv.style.visibility = "hidden";
+            }
 
-        // hide the preview div
-        let previewShouldHave = previewDiv.classList.contains("show_pre");
-        if (previewShouldHave) {
-            previewDiv.classList.remove("show_pre");
+            // call server to get response
+            getQuestion(index)
         }
-
-        // remove preview dive child nodes
-        if (previewDiv.hasChildNodes()) {
-            previewDiv.innerHTML = "";
-        }
-
-        // hide preview div
-        if (question.split(" ").length) {
-            previewDiv.style.visibility = "hidden";
-        }
-
-        // call server to get response
-        getQuestion(index)
     });
 });
 
