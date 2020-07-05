@@ -24,9 +24,7 @@ public class VerseExtractorImpl implements VerseExtractor{
             // loop through all the verse
             List<VersesContainer> verses =  getVersesInfoFromArray(question.getVerses());
             question.setVersesList(verses);
-
         }
-
         // return new List with all the verses already available.
         return finalQuestions;
     }
@@ -110,6 +108,12 @@ public class VerseExtractorImpl implements VerseExtractor{
         }
         return returnedVerse;
     }
+
+    @Override
+    public List<QuestionAnswer> removeBadVerse(List<QuestionAnswer> questionsWithVerses) {
+        return null;
+    }
+
     private List<VersesContainer> getVersesInfoFromArray(String[] questions){
 
         if (questions == null){

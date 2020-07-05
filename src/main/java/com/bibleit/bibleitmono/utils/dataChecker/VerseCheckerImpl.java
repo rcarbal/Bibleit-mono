@@ -45,4 +45,41 @@ public class VerseCheckerImpl implements VerseChecker{
 
         return listOfBadVerses;
     }
+
+    @Override
+    public List<QuestionAnswer> removeBadVerse(List<QuestionAnswer> questionsWithVerses) {
+
+        List<QuestionAnswer> returnedList = new ArrayList<>();
+
+        for (QuestionAnswer question : questionsWithVerses){
+            String[] verses = question.getVerses();
+
+            boolean allGood = false;
+
+            for (String verse : verses){
+                Verse verseLocationParams = verseExtractor.getVerseLocationParams(verse);
+
+                allGood = checkVerse(verseLocationParams);
+            }
+            if (allGood){
+                returnedList.add(question);
+            }
+
+        }
+        return returnedList;
+    }
+
+    private boolean checkVerse(Verse verseLocationParams) {
+        if (verseLocationParams.getBook() == null){
+            return false;
+        }
+        try {
+            Integer.parseInt(verseLocationParams.getChapter());
+            Integer.parseInt(verseLocationParams.getVerseNumber());
+        }catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
+        return true;
+    }
 }

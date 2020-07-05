@@ -9,4 +9,6 @@ public interface VerseExtractor {
     List<QuestionAnswer> getVerses(List<QuestionAnswer> finalQuestions);
 
     Verse getVerseLocationParams(String verseLocation);
+
+    List<QuestionAnswer> removeBadVerse(List<QuestionAnswer> questionsWithVerses);
 }

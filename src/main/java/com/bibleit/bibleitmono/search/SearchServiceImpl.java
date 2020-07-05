@@ -8,6 +8,7 @@ import com.bibleit.bibleitmono.question.QuestionRetrievalService;
 import com.bibleit.bibleitmono.remover.ElementRemover;
 import com.bibleit.bibleitmono.sorting.AlgorithmService;
 import com.bibleit.bibleitmono.utils.VerseExtractor;
+import com.bibleit.bibleitmono.utils.dataChecker.VerseChecker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,9 +28,12 @@ public class SearchServiceImpl implements SearchService {
     private ElementRemover remover;
     @Autowired
     private VerseExtractor verseExtractor;
+    @Autowired
+    private VerseChecker verseChecker;
 
     @Override
     public List<QuestionAnswer> getBestMatched(String userInput, QuestionType type) {
+
         // get questions
         QuestionAnswerImpl[] allQuestionList = questionsRetrieveService.getAll();
         //compare similar keywords
@@ -43,6 +47,8 @@ public class SearchServiceImpl implements SearchService {
 
         // add verses to the QuestionAnswer POJO
         List<QuestionAnswer> questionsWithVerses = verseExtractor.getVerses(finalQuestions);
-        return questionsWithVerses;
+        List<QuestionAnswer> questionRemovedBad = verseChecker.removeBadVerse(questionsWithVerses);
+
+        return questionRemovedBad;
     }
 }
