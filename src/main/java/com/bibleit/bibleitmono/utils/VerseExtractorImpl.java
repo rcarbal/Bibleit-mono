@@ -114,6 +114,19 @@ public class VerseExtractorImpl implements VerseExtractor{
         return null;
     }
 
+    @Override
+    public QuestionAnswer getVerseFromQuestion(QuestionAnswer questionById) {
+        String[] verses = questionById.getVerses();
+
+        List<VersesContainer> versesInfoFromArray = getVersesInfoFromArray(verses);
+        if (versesInfoFromArray == null ){
+            return null;
+        }
+
+        questionById.setVersesList(versesInfoFromArray);
+        return questionById;
+    }
+
     private List<VersesContainer> getVersesInfoFromArray(String[] questions){
 
         if (questions == null){
