@@ -61,6 +61,8 @@ public class VerseExtractorImpl implements VerseExtractor{
                         System.out.println(e);
                         System.out.println("Inside getVersesInfoFromArray() VerseExtractorImpl: book, chapter, " +
                                 "startVerse");
+                        System.out.println(y);
+                        System.out.println("\n");
                         continue;
                     }
 
@@ -72,6 +74,8 @@ public class VerseExtractorImpl implements VerseExtractor{
                     catch (Exception e){
                         System.out.println(e);
                         System.out.println("Inside getVersesInfoFromArray() VerseExtractorImpl: "+ endVerse);
+                        System.out.println(y);
+                        System.out.println("\n");
                         continue;
                     }
 
@@ -101,6 +105,7 @@ public class VerseExtractorImpl implements VerseExtractor{
                 System.out.println("Book: " + book);
                 System.out.println("Chapter:" + chapter);
                 System.out.println("Verse" + startVerse);
+                System.out.println("\n");
             }
             returnedVerse.setBook(book);
             returnedVerse.setChapter(chapter);

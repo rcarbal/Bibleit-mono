@@ -40,6 +40,9 @@ public class VerseCheckerImpl implements VerseChecker{
                         versePojo.getVerseNumber() == null){
                     listOfBadVerses.add(questionAnswer.getId());
                 }
+                else {
+                    System.out.println();
+                }
             }
         }
 
