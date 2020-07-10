@@ -8,4 +8,6 @@ public interface QuestionDAO {
     QuestionAnswerImpl[] getAll();
 
     QuestionAnswer getById(String id);
+
+    boolean refreshData();
 }

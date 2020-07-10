@@ -30,7 +30,7 @@ public class S3RemoteDataConnection implements RemoteDataConnection{
     }
     @PostConstruct
     @Scheduled(cron = "0 0 0 * * ?")
-    private void setConnection() throws IOException {
+    public boolean setConnection(){
 
         credentials = new BasicAWSCredentials(env.get("S3_ACCESS_ID"),env.get("S3_ACCESS_KEY"));
         s3client= AmazonS3ClientBuilder
@@ -44,6 +44,12 @@ public class S3RemoteDataConnection implements RemoteDataConnection{
 
 
         ObjectMapper mapper = new ObjectMapper();
-        data = mapper.readValue(inputStream, QuestionAnswerImpl[].class);
+        try {
+            data = mapper.readValue(inputStream, QuestionAnswerImpl[].class);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

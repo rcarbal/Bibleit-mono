@@ -29,4 +29,9 @@ public class JSONQuestionDAOImpl implements QuestionDAO{
         }
         return null;
     }
+
+    @Override
+    public boolean refreshData() {
+        return remoteConnection.setConnection();
+    }
 }

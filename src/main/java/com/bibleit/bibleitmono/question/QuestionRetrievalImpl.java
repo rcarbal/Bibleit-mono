@@ -21,4 +21,9 @@ public class QuestionRetrievalImpl implements QuestionRetrievalService{
     public QuestionAnswer getQuestionById(String id) {
         return dao.getById(id);
     }
+
+    @Override
+    public boolean refreshQuestions() {
+        return dao.refreshData();
+    }
 }

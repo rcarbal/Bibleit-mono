@@ -7,4 +7,6 @@ public interface QuestionRetrievalService {
 
     QuestionAnswerImpl[] getAll();
     QuestionAnswer getQuestionById(String id);
+
+    boolean refreshQuestions();
 }

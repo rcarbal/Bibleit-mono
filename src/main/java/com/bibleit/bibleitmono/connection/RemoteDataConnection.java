@@ -6,4 +6,6 @@ import org.springframework.stereotype.Component;
 @Component
 public interface RemoteDataConnection {
     QuestionAnswerImpl[] getAllResponse();
+
+    boolean setConnection();
 }
