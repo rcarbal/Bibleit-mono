@@ -30,11 +30,16 @@
                     <h1 class="display-4">Bible-It</h1>
 
                     <!-- With no search bar -->
-                    <div class="position-relative m-0">
+                    <div class="m-0">
                         <input id="searchInput" class="form-control input-lg mt-3" type="search" size='30' name='word'
                             autocomplete="off" onkeyup="echoWord()" autocorrect="off" autocapitalize="none">
 
-                        <div id="previewDiv" class="search-bar-results"></div>
+                        <div id="parentPreview">
+                            <div id="previewDiv" class="search-bar-results"></div>
+                            <div id="backgroundDiv"></div>
+                        </div>
+                            
+                        
                         <!-- <button input class="btn btn-primary btn-lg mt-4" onclick="getQuestion()">Bibleit</button> -->
 
                     </div>
@@ -45,9 +50,6 @@
     </div>
 
     <div class="container">
-        <div id="padingDiv">
-
-        </div>
 
         <div id="answerCard" class="card border-dark mt-5" style="visibility: hidden;">
 

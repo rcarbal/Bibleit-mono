@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.bible-it</groupId>
 	<artifactId>bibleit-mono</artifactId>
-	<version>0.0.8-SNAPSHOT</version>
+	<version>1.0-SNAPSHOT</version>
 	<name>bibleit-mono</name>
 	<description>Monolith project for bible-it server</description>
 

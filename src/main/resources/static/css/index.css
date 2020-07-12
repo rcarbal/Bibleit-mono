@@ -71,12 +71,12 @@ body{
   text-align: start;
 }
 
-#inputContainer{
+/* #inputContainer{
   position: absolute;
   right: 0;
   left: 0;
   z-index: 1;
-}
+} */
 
 #answerCard{
   z-index: -1;
@@ -91,6 +91,23 @@ body{
   z-index: -1;
 }
 
+#backgroundDiv {
+  z-index: 1;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  border-top: none;
+}
+
+#parentPreview {
+  position: relative;
+}
+
+
 #previewDiv {
   background-color: white;
+  position: absolute;
+  z-index: 2;
 }

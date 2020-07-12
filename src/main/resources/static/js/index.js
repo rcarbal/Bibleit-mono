@@ -2,6 +2,9 @@ let EVENT_LISTENER_RUNNING = false;
 let currentResponseData;
 let input = document.getElementById('searchInput');
 let previewDiv = document.getElementById('previewDiv');
+let previewDivHeight = 0;
+let previewDivWidth = 0;
+let backgroundDiv = document.getElementById('backgroundDiv');
 
 let answerCard = document.getElementById('answerCard');
 let answer = document.getElementById('cardAnswer');
@@ -17,8 +20,11 @@ function echoWord() {
 
         EVENT_LISTENER_RUNNING = true;
 
-        let input = document.getElementById('searchInput');
-        let previewDiv = document.getElementById('previewDiv');
+        input = document.getElementById('searchInput');
+        previewDiv = document.getElementById('previewDiv');
+        
+        const inputLength = input.offsetWidth;
+        previewDiv.style.width = `${inputLength}px`;
 
         // remove all previewDiv's children if any
         if (previewDiv.hasChildNodes()) {
@@ -38,6 +44,7 @@ function echoWord() {
             }
 
             previewDiv.style.visibility = "hidden";
+            backgroundDiv.style.visibility = "hidden";
 
             EVENT_LISTENER_RUNNING = false;
         }
@@ -63,6 +70,7 @@ $(document).ready(function () {
             let previewShouldHave = previewDiv.classList.contains("show_pre");
             if (previewShouldHave) {
                 previewDiv.classList.remove("show_pre");
+                backgroundDiv.style.visibility = "hidden";
             }
     
             // remove preview dive child nodes
@@ -73,6 +81,7 @@ $(document).ready(function () {
             // hide preview div
             if (question.split(" ").length) {
                 previewDiv.style.visibility = "hidden";
+                backgroundDiv.style.visibility = "hidden";
             }
 
             // call server to get response
@@ -109,8 +118,15 @@ function getPreviewQuestion(inputValue) {
                 let previewShouldNotHave = previewDiv.classList.contains("show_pre");
                 if (!previewShouldNotHave) {
                     previewDiv.classList.add("show_pre");
+                    backgroundDiv.style.visibility = "visible";  
                 }
                 previewDiv.style.visibility = "visible";
+
+                previewDivHeight = previewDiv.offsetHeight;
+                previewDivWidth = previewDiv.offsetWidth;
+
+                backgroundDiv.style.height = `${previewDivHeight}px`;
+                backgroundDiv.style.width = `${previewDivWidth}px`;
             }
 
             EVENT_LISTENER_RUNNING = false;
@@ -140,6 +156,7 @@ function getQuestion(index) {
 
         if (window.getComputedStyle(previewDiv).visibility === "visible") {
             previewDiv.style.visibility = "hidden";
+            backgroundDiv.style.visibility = "hidden";
         }
 
         // remove all previewDiv's children if any
