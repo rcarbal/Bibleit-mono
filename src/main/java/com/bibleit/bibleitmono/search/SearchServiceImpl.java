@@ -1,6 +1,6 @@
 package com.bibleit.bibleitmono.search;
 
-import com.bibleit.bibleitmono.comparer.KeywordSimularityMatcher;
+import com.bibleit.bibleitmono.comparer.KeywordSimilarityMatcher;
 import com.bibleit.bibleitmono.enums.QuestionType;
 import com.bibleit.bibleitmono.pojo.QuestionAnswer;
 import com.bibleit.bibleitmono.pojo.QuestionAnswerImpl;
@@ -21,7 +21,7 @@ public class SearchServiceImpl implements SearchService {
     @Autowired
     private QuestionRetrievalService questionsRetrieveService;
     @Autowired
-    private KeywordSimularityMatcher similarityMatcherService;
+    private KeywordSimilarityMatcher similarityMatcherService;
     @Autowired
     private AlgorithmService algoService;
     @Autowired

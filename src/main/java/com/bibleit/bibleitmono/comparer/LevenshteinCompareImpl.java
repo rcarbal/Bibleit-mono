@@ -4,7 +4,6 @@ import com.bibleit.bibleitmono.enums.QuestionType;
 import com.bibleit.bibleitmono.pojo.QuestionAnswer;
 import com.bibleit.bibleitmono.pojo.QuestionAnswerImpl;
 import org.apache.commons.text.similarity.LevenshteinDistance;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -13,7 +12,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 
 @Component
-public class LevenshteinCompareImpl implements KeywordSimularityMatcher {
+public class LevenshteinCompareImpl implements KeywordSimilarityMatcher {
 
     private List<QuestionAnswer> scoredArr;
     private String[] splitFromUser;
@@ -24,8 +23,6 @@ public class LevenshteinCompareImpl implements KeywordSimularityMatcher {
     private String inputStingToCompare;
     private LevenshteinDistance distance = new LevenshteinDistance();
     private String matchedString;
-    @Autowired
-    private KeywordSimularityMatcher keywordCompare;
 
 
     @Override
