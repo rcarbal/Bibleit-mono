@@ -1,0 +1,13 @@
+package com.bibleit.bibleitmono.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class DonationController {
+
+    @GetMapping("/donate")
+    public String donationInfo(){
+        return "donationInfo";
+    }
+}

@@ -1,7 +1,8 @@
 package com.bibleit.bibleitmono.payment;
 
-import com.stripe.model.PaymentIntent;
+import com.stripe.exception.StripeException;
+import com.stripe.model.checkout.Session;
 
 public interface PaymentService {
-    PaymentIntent getPaymentInformation(String currency, long amount);
+    Session getPaymentInformation(String currency, long amount) throws StripeException;
 }
