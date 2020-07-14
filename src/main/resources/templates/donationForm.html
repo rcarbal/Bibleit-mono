@@ -87,7 +87,7 @@
                     <div class="form-group row pt-1">                
                         <label class="col-sm-2 col-form-label" for="submit"></label>
                         <div class="col-sm-6">
-                            <button type="submit" class="btn btn-primary">Process Donation</button>
+                            <button type="submit" class="btn btn-primary" id="donateButton">Process Donation</button>
                         </div>
                     </div>
                 </form>
@@ -95,7 +95,7 @@
             <div class="col-sm-2"></div>
         </div>
     </div>
-
+    <script src="https://js.stripe.com/v3/"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
@@ -103,6 +103,23 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        let stripe = Stripe("pk_test_gvpPK104YTOw1IUj773jddt8006MgjFEbN");
+        let donateButton = document.getElementById("donateButton");
+        donateButton.addEventListener('click', function(event){
+            event.preventDefault();
+            stripe.redirectToCheckout({
+                sessionId: sessionId
+            });
+        });
+
+        let sessionId;
+        
+        axios.post(`/api/createSession`)
+            .then((response)=>{
+                sessionId = response.data.clientSecretId;
+            });
+    </script>
 
 </body>
 

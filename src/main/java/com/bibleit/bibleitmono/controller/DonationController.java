@@ -16,5 +16,10 @@ public class DonationController {
         return "donationForm";
     }
 
+    @GetMapping("/donationSuccess")
+    public String donationSuccess(){
+        return "success";
+    }
+
 
 }
