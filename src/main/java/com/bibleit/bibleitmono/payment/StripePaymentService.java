@@ -14,7 +14,7 @@ public class StripePaymentService implements PaymentService{
     private Map<String, String> env = System.getenv();
 
     @Override
-    public Session getPaymentInformation(String currency, long amount) throws StripeException {
+    public Session getPaymentInformation(String currency, String donationName, long amount) throws StripeException {
 
         Stripe.apiKey = env.get("STRIPE_TEST_SECRET");
 
@@ -29,11 +29,11 @@ public class StripePaymentService implements PaymentService{
                                         .setQuantity(1L)
                                         .setPriceData(
                                                 SessionCreateParams.LineItem.PriceData.builder()
-                                                        .setCurrency("usd")
-                                                        .setUnitAmount(2000L)
+                                                        .setCurrency(currency)
+                                                        .setUnitAmount(amount)
                                                         .setProductData(
                                                                 SessionCreateParams.LineItem.PriceData.ProductData.builder()
-                                                                        .setName("T-shirt")
+                                                                        .setName(donationName)
                                                                         .build())
                                                         .build())
                                         .build())

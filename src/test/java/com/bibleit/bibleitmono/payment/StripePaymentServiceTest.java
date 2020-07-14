@@ -14,9 +14,10 @@ class StripePaymentServiceTest {
         PaymentService stripePaymentService = new StripePaymentService();
 
         String currency = "usd";
-        long amount = 1099L;
+        String productName = "Bible-it Donation";
+        long donationAmount = 1099L;
 
-        Session paymentIntent = stripePaymentService.getPaymentInformation(currency, amount);
+        Session paymentIntent = stripePaymentService.getPaymentInformation(currency, productName, donationAmount);
 
         assertNotNull(paymentIntent);
     }

@@ -19,7 +19,12 @@ public class PaymentController {
 
     @PostMapping("/createSession")
     public PaymentResponse createSession() throws StripeException {
-        Session session = paymentService.getPaymentInformation("usd", 1099L);
+
+        String currency = "usd";
+        String productName = "Bible-it Donation";
+        long donationAmount = 1099L;
+
+        Session session = paymentService.getPaymentInformation(currency, productName, donationAmount);
         PaymentResponse paymentResponse = new PaymentResponseImpl();
         paymentResponse.addClientId(session.getId());
         return paymentResponse;
