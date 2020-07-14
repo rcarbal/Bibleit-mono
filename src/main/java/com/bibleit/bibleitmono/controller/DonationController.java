@@ -10,4 +10,11 @@ public class DonationController {
     public String donationInfo(){
         return "donationInfo";
     }
+
+    @GetMapping("/donationForm")
+    public String donationForm(){
+        return "donationForm";
+    }
+
+
 }

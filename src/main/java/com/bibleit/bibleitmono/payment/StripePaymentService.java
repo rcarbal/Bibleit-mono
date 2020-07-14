@@ -20,8 +20,8 @@ public class StripePaymentService implements PaymentService{
                 SessionCreateParams.builder()
                         .addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
                         .setMode(SessionCreateParams.Mode.PAYMENT)
-                        .setSuccessUrl("https://example.com/success?session_id={CHECKOUT_SESSION_ID}")
-                        .setCancelUrl("https://example.com/cancel")
+                        .setSuccessUrl("/success?session_id={CHECKOUT_SESSION_ID}")
+                        .setCancelUrl("/cancel")
                         .addLineItem(
                                 SessionCreateParams.LineItem.builder()
                                         .setQuantity(1L)
