@@ -8,6 +8,7 @@ import com.stripe.model.checkout.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -18,7 +19,12 @@ public class PaymentController {
     private PaymentService paymentService;
 
     @PostMapping("/createSession")
-    public PaymentResponse createSession() throws StripeException {
+    public PaymentResponse createSession(@RequestParam String fName,
+                                         @RequestParam String lName,
+                                         @RequestParam String email,
+                                         @RequestParam String phoneN,
+                                         @RequestParam long amount,
+                                         @RequestParam String comment) throws StripeException {
 
         String currency = "usd";
         String productName = "Bible-it Donation";
