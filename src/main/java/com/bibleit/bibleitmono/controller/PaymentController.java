@@ -28,9 +28,8 @@ public class PaymentController {
 
         String currency = "usd";
         String productName = "Bible-it Donation";
-        long donationAmount = 1099L;
 
-        Session session = paymentService.getPaymentInformation(currency, productName, donationAmount);
+        Session session = paymentService.getPaymentInformation(currency, productName, amount);
         PaymentResponse paymentResponse = new PaymentResponseImpl();
         paymentResponse.addClientId(session.getId());
         return paymentResponse;

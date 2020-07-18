@@ -28,65 +28,67 @@
 
                 <hr>
                 <br>
-        
+
                 <form>
                     <div class="form-group row">
-                        
+
                         <!-- first name -->
                         <label for="firstName" class="col-sm-2 col-form-label">First Name</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="firstName" value="testFName">
                         </div>
                     </div>
-                    
+
                     <!-- last name -->
                     <div class="form-group row">
-        
+
                         <label for="lastName" class="col-sm-2 col-form-label">Last Name</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="lastName" value="testLName">
                         </div>
                     </div>
-        
+
                     <!-- email  -->
-                    <div class="form-group row">                
+                    <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="email">Email Address</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="email"value="testEmail">
+                            <input type="text" class="form-control" id="email" value="testEmail">
                         </div>
                     </div>
-        
+
                     <!-- phone number  -->
-                    <div class="form-group row">                
+                    <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="phone">Phone Number</label>
                         <div class="col-sm-6">
-                            <input class="form-control" type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" value="323-383-383">
+                            <input class="form-control" type="tel" id="phone" name="phone"
+                                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="323-383-3833">
                         </div>
                     </div>
-        
+
                     <!-- Amount  -->
-                    <div class="form-group row">                
+                    <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="amount">Amount</label>
                         <div class="col-sm-7">
-                            <input id="amount" class="form-control" type="number" min="0.00" max="1000000.00" step="0.01" placeholder="$" value="30000">
+                            <input id="amount" class="form-control" type="number" min="0.00" max="1000000.00"
+                                step="0.01" placeholder="$" value="30000">
                         </div>
                         <div class="col-sm-2">
                             USD
                         </div>
                     </div>
-        
+
                     <!-- comment  -->
-                    <div class="form-group row">                
+                    <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="comment">Comment</label>
                         <div class="col-sm-8">
-                            <textarea id="comment" class="form-control" rows="3" >
+                            <textarea id="comment" class="form-control" rows="3">
                                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ut commodi sit, consequuntur earum unde alias, aliquid omnis facilis, officia neque iste ex voluptas libero. Culpa vitae consequatur distinctio repellat? Voluptas earum eum voluptatem a quam, atque quibusdam! Doloribus labore laborum autem! Nesciunt et illum totam tenetur saepe aliquam, beatae corporis.
                             </textarea>
                         </div>
                     </div>
-        
+
                     <!-- submit  -->
-                    <div class="form-group row pt-1">                
+                    <div class="form-group row pt-1">
                         <label class="col-sm-2 col-form-label" for="submit"></label>
                         <div class="col-sm-6">
                             <button type="submit" class="btn btn-primary" id="donateButton">Process Donation</button>
@@ -115,25 +117,43 @@
         let amount = document.getElementById("amount");
         let comment = document.getElementById("comment");
 
-        donateButton.addEventListener('click', function(event){
+        // donateButton.addEventListener('click', function(event){
 
-            event.preventDefault();
-            stripe.redirectToCheckout({
-                sessionId: sessionId
-            });
-        });
+        //     event.preventDefault();
+        //     stripe.redirectToCheckout({
+        //         sessionId: sessionId
+        //     });
+        // });
 
         let sessionId;
 
-        axios.post(`/api/createSession?fName=${fName.value}
-        &lName=${lName.value}
-        &email=${email.value}
-        &phoneN=${phoneN.value}
-        &amount=${amount.value}
-        &comment=${comment.value}`)
-            .then((response)=>{
-                sessionId = response.data.clientSecretId;
-            });
+        // axios.post(`/api/createSession?fName=${fName.value}
+        // &lName=${lName.value}
+        // &email=${email.value}
+        // &phoneN=${phoneN.value}
+        // &amount=${amount.value}
+        // &comment=${comment.value}`)
+        //     .then((response)=>{
+        //         sessionId = response.data.clientSecretId;
+        //     });
+
+        donateButton.addEventListener('click', function (event) {
+            axios.post(`/api/createSession?fName=${fName.value}
+            &lName=${lName.value}
+            &email=${email.value}
+            &phoneN=${phoneN.value}
+            &amount=${amount.value}
+            &comment=${comment.value}`)
+                .then((response) => {
+                    sessionId = response.data.clientSecretId;
+                })
+                .then((event) => {
+                    event.preventDefault();
+                    stripe.redirectToCheckout({
+                        sessionId: sessionId
+                    });
+                });
+        })
     </script>
 
 </body>
