@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bible-it Donation Review</title>
+</head>
+<body>
+
+    <!-- <div th:text="${}"></div> -->
+
+        <!-- <script>
+        let stripe = Stripe("pk_test_gvpPK104YTOw1IUj773jddt8006MgjFEbN");
+        let donateButton = document.getElementById("donateButton");
+        let fName = document.getElementById("firstName");
+        let lName = document.getElementById("lastName");
+        let email = document.getElementById("email");
+        let phoneN = document.getElementById("phone");
+        let amount = document.getElementById("amount");
+        let comment = document.getElementById("comment");
+
+        donateButton.addEventListener('click', function(event){
+
+            event.preventDefault();
+            stripe.redirectToCheckout({
+                sessionId: sessionId
+            });
+        });
+
+        let sessionId;
+
+        donateButton.addEventListener('click', function(event) {
+            axios.post(`/api/createSession?fName=${fName.value}
+            &lName=${lName.value}
+            &email=${email.value}
+            &phoneN=${phoneN.value}
+            &amount=${amount.value}
+            &comment=${comment.value}`)
+                .then((response) => {
+                    sessionId = response.data.clientSecretId;
+                    event.preventDefault();
+                    stripe.redirectToCheckout({
+                        sessionId: sessionId
+                    });
+                })
+        })
+
+        donateButton.addEventListener('click', (event) => {
+            axios.post(`/donationReview?fName=${fName.value}
+                &lName=${lName.value}
+                &email=${email.value}
+                &phoneN=${phoneN.value}
+                &amount=${amount.value}
+                &comment=${comment.value}`);
+        });
+    </script> -->
+    
+</body>
+</html>

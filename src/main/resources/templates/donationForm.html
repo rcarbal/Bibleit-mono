@@ -29,13 +29,13 @@
                 <hr>
                 <br>
 
-                <form>
+                <form action="/donationReview">
                     <div class="form-group row">
 
                         <!-- first name -->
                         <label for="firstName" class="col-sm-2 col-form-label">First Name</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="firstName" value="testFName">
+                            <input type="text" class="form-control" id="firstName" value="testFName" name="fName">
                         </div>
                     </div>
 
@@ -44,7 +44,7 @@
 
                         <label for="lastName" class="col-sm-2 col-form-label">Last Name</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="lastName" value="testLName">
+                            <input type="text" class="form-control" id="lastName" value="testLName" name="lName">
                         </div>
                     </div>
 
@@ -52,7 +52,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="email">Email Address</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="email" value="testEmail">
+                            <input type="text" class="form-control" id="email" value="testEmail" name="email">
                         </div>
                     </div>
 
@@ -60,7 +60,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="phone">Phone Number</label>
                         <div class="col-sm-6">
-                            <input class="form-control" type="tel" id="phone" name="phone"
+                            <input class="form-control" type="tel" id="phone" name="phoneN"
                                 pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="323-383-3833">
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                         <label class="col-sm-2 col-form-label" for="amount">Amount</label>
                         <div class="col-sm-7">
                             <input id="amount" class="form-control" type="number" min="0.00" max="1000000.00"
-                                step="0.01" placeholder="$" value="30000">
+                                step="0.01" placeholder="$" value="30000" name="amount">
                         </div>
                         <div class="col-sm-2">
                             USD
@@ -81,21 +81,24 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="comment">Comment</label>
                         <div class="col-sm-8">
-                            <textarea id="comment" class="form-control" rows="3">
+                            <textarea id="comment" class="form-control" rows="3" name="comment">
                                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ut commodi sit, consequuntur earum unde alias, aliquid omnis facilis, officia neque iste ex voluptas libero. Culpa vitae consequatur distinctio repellat? Voluptas earum eum voluptatem a quam, atque quibusdam! Doloribus labore laborum autem! Nesciunt et illum totam tenetur saepe aliquam, beatae corporis.
                             </textarea>
                         </div>
                     </div>
-
                     <!-- submit  -->
                     <div class="form-group row pt-1">
                         <label class="col-sm-2 col-form-label" for="submit"></label>
                         <div class="col-sm-6">
-                            <button type="submit" class="btn btn-primary" id="donateButton">Process Donation</button>
+                            <button type="submit" class="btn btn-primary" id="donateButton">Submit Donation</button>
                         </div>
                     </div>
-                </form>
+
+
             </div>
+            </form>
+
+
             <div class="col-sm-2"></div>
         </div>
     </div>
@@ -107,54 +110,6 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script>
-        let stripe = Stripe("pk_test_gvpPK104YTOw1IUj773jddt8006MgjFEbN");
-        let donateButton = document.getElementById("donateButton");
-        let fName = document.getElementById("firstName");
-        let lName = document.getElementById("lastName");
-        let email = document.getElementById("email");
-        let phoneN = document.getElementById("phone");
-        let amount = document.getElementById("amount");
-        let comment = document.getElementById("comment");
-
-        // donateButton.addEventListener('click', function(event){
-
-        //     event.preventDefault();
-        //     stripe.redirectToCheckout({
-        //         sessionId: sessionId
-        //     });
-        // });
-
-        let sessionId;
-
-        // axios.post(`/api/createSession?fName=${fName.value}
-        // &lName=${lName.value}
-        // &email=${email.value}
-        // &phoneN=${phoneN.value}
-        // &amount=${amount.value}
-        // &comment=${comment.value}`)
-        //     .then((response)=>{
-        //         sessionId = response.data.clientSecretId;
-        //     });
-
-        donateButton.addEventListener('click', function (event) {
-            axios.post(`/api/createSession?fName=${fName.value}
-            &lName=${lName.value}
-            &email=${email.value}
-            &phoneN=${phoneN.value}
-            &amount=${amount.value}
-            &comment=${comment.value}`)
-                .then((response) => {
-                    sessionId = response.data.clientSecretId;
-                })
-                .then((event) => {
-                    event.preventDefault();
-                    stripe.redirectToCheckout({
-                        sessionId: sessionId
-                    });
-                });
-        })
-    </script>
 
 </body>
 
