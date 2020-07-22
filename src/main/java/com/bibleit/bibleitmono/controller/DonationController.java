@@ -36,6 +36,14 @@ public class DonationController {
                                  @RequestParam long amount,
                                  @RequestParam String comment,
                                  Model theModel){
+
+        theModel.addAttribute("fName", fName);
+        theModel.addAttribute("lName", lName);
+        theModel.addAttribute("email", email);
+        theModel.addAttribute("phoneNumber", phoneN);
+        theModel.addAttribute("amount", amount);
+        theModel.addAttribute("comment", comment);
+
         return "donationReview";
     }
 

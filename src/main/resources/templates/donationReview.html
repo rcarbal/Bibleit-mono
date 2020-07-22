@@ -34,46 +34,60 @@
                     <ul class="list-group list-group-flush">
                         <!-- first name -->
                         <div class="row">
-                            
+
                             <strong for="firstName" class="col-sm-3 col-form-label">First Name:</strong>
-                            <li class="col-sm-8 list-group-item reviewText" style = "font-family: 'Open Sans', sans-serif; font-size: 1.7em"> First Name </li>
+                            <li class="col-sm-8 list-group-item reviewText"
+                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${fName}"></li>
                         </div>
 
                         <!-- last name -->
                         <div class="row">
                             <strong for="firstName" class="col-sm-3 col-form-label">Last Name:</strong>
-                            <li class="col-sm-8 list-group-item reviewText" style = "font-family: 'Open Sans', sans-serif; font-size: 1.7em"> Last Name </li>
+                            <li class="col-sm-8 list-group-item reviewText"
+                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${lName}"></li>
                         </div>
 
                         <!-- email  -->
                         <div class="row">
                             <strong for="firstName" class="col-sm-3 col-form-label">Email:</strong>
-                            <li class="col-sm-8 list-group-item reviewText" style = "font-family: 'Open Sans', sans-serif; font-size: 1.7em">rcarbaleq2@gmail.com</li>
+                            <li class="col-sm-8 list-group-item reviewText"
+                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${email}"></li>
                         </div>
 
                         <!-- phone number  -->
                         <div class="row">
                             <strong for="firstName" class="col-sm-3 col-form-label">Phone Number:</strong>
-                            <li class="col-sm-8 list-group-item reviewText" style = "font-family: 'Open Sans', sans-serif; font-size: 1.7em">323-273-2833</li>
+                            <li class="col-sm-8 list-group-item reviewText"
+                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${phoneNumber}">
+                            </li>
                         </div>
 
                         <!-- Amount  -->
                         <div class="row">
                             <strong for="firstName" class="col-sm-3 col-form-label">Amount:</strong>
-                            <li class="col-sm-8 list-group-item reviewText" style = "font-family: 'Open Sans', sans-serif; font-size: 1.7em">$2500.00</li>
+                            <li class="col-sm-8 list-group-item reviewText"
+                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${amount}"></li>
                         </div>
 
                         <!-- comment  -->
                         <div class="row">
                             <strong for="firstName" class="col-sm-3 col-form-label">Comment:</strong>
-                            <li class="col-sm-8 list-group-item reviewText"style = "font-family: 'Open Sans', sans-serif; font-size: 1.7em">Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque temporibus dolore eaque, officia repellat qui? Error excepturi voluptate laudantium ducimus assumenda expedita nemo earum beatae similique rerum, dolores neque incidunt.</li>
+                            <li class="col-sm-8 list-group-item reviewText"
+                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${comment}">
+                            </li>
                         </div>
                         <!-- submit  -->
                         <br>
-                        <div class="row">
-                            <strong class="col-sm-2 col-form-label" for="submit"></strong>
-                            <div class="col-sm-8">
-                                <button type="submit" class="btn btn-primary" id="donateButton">Submit Donation</button>
+                        <br>
+                        <div class="row justify-content-between">
+                            <div class="col">
+                                <button class="btn btn-primary" onclick="goBack()">Back</button>
+                                <a href="/" id="cancel" name="cancel" class="btn btn-default">Cancel</a>
+                            </div>
+
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary" id="donateButton">Process
+                                    Donation</button>
                             </div>
                         </div>
 
@@ -94,6 +108,12 @@
                     crossorigin="anonymous"></script>
                 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
                 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital@1&display=swap" rel="stylesheet">
+
+                <script>
+                    function goBack() {
+                        window.history.back();
+                    }
+                </script>
 
                 <!-- <div th:text="${}"></div> -->
 
