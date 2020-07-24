@@ -1,6 +1,6 @@
 package com.bibleit.bibleitmono.utils.dataChecker;
 
-import com.bibleit.bibleitmono.doa.QuestionDAO;
+import com.bibleit.bibleitmono.dao.QuestionDAO;
 import com.bibleit.bibleitmono.pojo.QuestionAnswer;
 import com.bibleit.bibleitmono.pojo.QuestionAnswerImpl;
 import com.bibleit.bibleitmono.pojo.Verse;

@@ -1,6 +1,6 @@
 package com.bibleit.bibleitmono.question;
 
-import com.bibleit.bibleitmono.doa.QuestionDAO;
+import com.bibleit.bibleitmono.dao.QuestionDAO;
 import com.bibleit.bibleitmono.pojo.QuestionAnswer;
 import com.bibleit.bibleitmono.pojo.QuestionAnswerImpl;
 import org.springframework.beans.factory.annotation.Autowired;

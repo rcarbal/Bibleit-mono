@@ -1,4 +1,4 @@
-package com.bibleit.bibleitmono.controller;
+package com.bibleit.bibleitmono.controller.payment;
 
 import com.bibleit.bibleitmono.payment.PaymentService;
 import com.bibleit.bibleitmono.pojo.PaymentResponse;

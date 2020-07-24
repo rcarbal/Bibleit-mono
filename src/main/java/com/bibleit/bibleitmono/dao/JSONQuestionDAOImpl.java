@@ -1,4 +1,4 @@
-package com.bibleit.bibleitmono.doa;
+package com.bibleit.bibleitmono.dao;
 
 import com.bibleit.bibleitmono.connection.RemoteDataConnection;
 import com.bibleit.bibleitmono.pojo.QuestionAnswer;

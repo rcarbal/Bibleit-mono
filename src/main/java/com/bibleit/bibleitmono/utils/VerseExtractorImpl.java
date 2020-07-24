@@ -1,6 +1,6 @@
 package com.bibleit.bibleitmono.utils;
 
-import com.bibleit.bibleitmono.doa.BibleJSONDao;
+import com.bibleit.bibleitmono.dao.BibleJSONDao;
 import com.bibleit.bibleitmono.pojo.QuestionAnswer;
 import com.bibleit.bibleitmono.pojo.Verse;
 import com.bibleit.bibleitmono.pojo.VersesContainer;
