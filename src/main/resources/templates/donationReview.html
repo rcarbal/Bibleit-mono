@@ -37,28 +37,28 @@
 
                             <strong for="firstName" class="col-sm-3 col-form-label">First Name:</strong>
                             <li class="col-sm-8 list-group-item reviewText"
-                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${fName}"></li>
+                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${fName}" id="firstName"></li>
                         </div>
 
                         <!-- last name -->
                         <div class="row">
                             <strong for="firstName" class="col-sm-3 col-form-label">Last Name:</strong>
                             <li class="col-sm-8 list-group-item reviewText"
-                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${lName}"></li>
+                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${lName}" id="lastName"></li>
                         </div>
 
                         <!-- email  -->
                         <div class="row">
                             <strong for="firstName" class="col-sm-3 col-form-label">Email:</strong>
                             <li class="col-sm-8 list-group-item reviewText"
-                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${email}"></li>
+                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${email}" id="email"></li>
                         </div>
 
                         <!-- phone number  -->
                         <div class="row">
                             <strong for="firstName" class="col-sm-3 col-form-label">Phone Number:</strong>
                             <li class="col-sm-8 list-group-item reviewText"
-                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${phoneNumber}">
+                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${phoneNumber}" id="phone">
                             </li>
                         </div>
 
@@ -66,14 +66,14 @@
                         <div class="row">
                             <strong for="firstName" class="col-sm-3 col-form-label">Amount:</strong>
                             <li class="col-sm-8 list-group-item reviewText"
-                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${amount}"></li>
+                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${amount}" id="amount"></li>
                         </div>
 
                         <!-- comment  -->
                         <div class="row">
                             <strong for="firstName" class="col-sm-3 col-form-label">Comment:</strong>
                             <li class="col-sm-8 list-group-item reviewText"
-                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${comment}">
+                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${comment}" id="comment">
                             </li>
                         </div>
                         <!-- submit  -->
@@ -117,51 +117,35 @@
 
                 <!-- <div th:text="${}"></div> -->
 
-                <!-- <script>
-        let stripe = Stripe("pk_test_gvpPK104YTOw1IUj773jddt8006MgjFEbN");
-        let donateButton = document.getElementById("donateButton");
-        let fName = document.getElementById("firstName");
-        let lName = document.getElementById("lastName");
-        let email = document.getElementById("email");
-        let phoneN = document.getElementById("phone");
-        let amount = document.getElementById("amount");
-        let comment = document.getElementById("comment");
+                <script>
+                    let stripe = Stripe("pk_test_gvpPK104YTOw1IUj773jddt8006MgjFEbN");
+                    let donateButton = document.getElementById("donateButton");
+                    let fName = document.getElementById("firstName");
+                    let lName = document.getElementById("lastName");
+                    let email = document.getElementById("email");
+                    let phoneN = document.getElementById("phone");
+                    let amount = document.getElementById("amount");
+                    let comment = document.getElementById("comment");
 
-        donateButton.addEventListener('click', function(event){
+                    let sessionId;
 
-            event.preventDefault();
-            stripe.redirectToCheckout({
-                sessionId: sessionId
-            });
-        });
+                    donateButton.addEventListener('click', function (event) {
 
-        let sessionId;
-
-        donateButton.addEventListener('click', function(event) {
-            axios.post(`/api/createSession?fName=${fName.value}
-            &lName=${lName.value}
-            &email=${email.value}
-            &phoneN=${phoneN.value}
-            &amount=${amount.value}
-            &comment=${comment.value}`)
-                .then((response) => {
-                    sessionId = response.data.clientSecretId;
-                    event.preventDefault();
-                    stripe.redirectToCheckout({
-                        sessionId: sessionId
+                        axios.post(`/api/donationProcess?fName=${fName.textContent}
+                            &lName=${lName.textContent}
+                            &email=${email.textContent}
+                            &phoneN=${phoneN.textContent}
+                            &amount=${amount.textContent}
+                            &comment=${comment.textContent}`)
+                            .then((response) => {
+                                sessionId = response.data;
+                                event.preventDefault();
+                                stripe.redirectToCheckout({
+                                    sessionId: sessionId
+                                });
+                            })
                     });
-                })
-        })
-
-        donateButton.addEventListener('click', (event) => {
-            axios.post(`/donationReview?fName=${fName.value}
-                &lName=${lName.value}
-                &email=${email.value}
-                &phoneN=${phoneN.value}
-                &amount=${amount.value}
-                &comment=${comment.value}`);
-        });
-    </script> -->
+                </script>
 
     </body>
 

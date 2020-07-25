@@ -14,12 +14,13 @@ public class StripePaymentService implements PaymentService{
     private Map<String, String> env = System.getenv();
 
     @Override
-    public Session getPaymentInformation(String currency, String donationName, long amount) throws StripeException {
+    public Session getPaymentInformation(String currency, String donationName, long amount, String email) throws StripeException {
 
         Stripe.apiKey = env.get("STRIPE_TEST_SECRET");
 
         SessionCreateParams params =
                 SessionCreateParams.builder()
+                        .setCustomerEmail(email)
                         .addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
                         .setMode(SessionCreateParams.Mode.PAYMENT)
                         .setSuccessUrl("http://localhost:8080/donationSuccess?session_id={CHECKOUT_SESSION_ID}")

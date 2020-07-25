@@ -15,9 +15,10 @@ class StripePaymentServiceTest {
 
         String currency = "usd";
         String productName = "Bible-it Donation";
+        String email = "rcarbaleq2@gmail.com";
         long donationAmount = 1099L;
 
-        Session paymentIntent = stripePaymentService.getPaymentInformation(currency, productName, donationAmount);
+        Session paymentIntent = stripePaymentService.getPaymentInformation(currency, productName, donationAmount, email);
 
         assertNotNull(paymentIntent);
     }

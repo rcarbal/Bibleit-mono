@@ -3,10 +3,12 @@ package com.bibleit.bibleitmono.service.person;
 import com.bibleit.bibleitmono.dao.mysql.Person;
 import com.bibleit.bibleitmono.dao.mysql.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class PersonServiceImpl implements PersonService{
 
     @Autowired
