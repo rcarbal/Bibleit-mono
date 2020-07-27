@@ -34,12 +34,17 @@ public class PersonServiceImpl implements PersonService{
     }
 
     @Override
-    public void save(Person person) {
-        personRepository.save(person);
+    public Person save(Person person) {
+        return personRepository.save(person);
     }
 
     @Override
     public void deleteById(int id) {
         personRepository.deleteById(id);
+    }
+
+    @Override
+    public int findPerson(String fName, String lName, String email, String phoneN) {
+        return 0;
     }
 }

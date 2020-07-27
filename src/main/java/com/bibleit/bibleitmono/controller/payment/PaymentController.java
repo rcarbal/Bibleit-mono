@@ -1,8 +1,10 @@
 package com.bibleit.bibleitmono.controller.payment;
 
+import com.bibleit.bibleitmono.dao.mysql.Person;
 import com.bibleit.bibleitmono.payment.PaymentService;
 import com.bibleit.bibleitmono.pojo.PaymentResponse;
 import com.bibleit.bibleitmono.pojo.PaymentResponseImpl;
+import com.bibleit.bibleitmono.service.person.PersonService;
 import com.stripe.exception.StripeException;
 import com.stripe.model.checkout.Session;
 import org.json.simple.JSONObject;
@@ -14,13 +16,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1/payment")
 public class PaymentController {
 
     @Autowired
     private PaymentService paymentService;
+    @Autowired
+    private PersonService personService;
 
-    @PostMapping("/createSession")
+    @PostMapping("/createPaymentSession")
     public PaymentResponse createSession(@RequestParam String fName,
                                          @RequestParam String lName,
                                          @RequestParam String email,
@@ -37,7 +41,7 @@ public class PaymentController {
         return paymentResponse;
     }
 
-    @PostMapping("/donationProcess")
+    @PostMapping("/processPaymentSession")
     public String donationProcess(@RequestParam String fName,
                                   @RequestParam String lName,
                                   @RequestParam String email,
@@ -58,6 +62,18 @@ public class PaymentController {
         paymentResponse.addClientId(session.getId());
 
         // store session id to of donation
+        Person person = new Person(fName, lName, email, phoneN);
+        Person savedPerson = personService.save(person);
+
+        // TODO person object is not saved in the database
+        if (savedPerson == null){
+            return null;
+        }
+        else if (person.getId() > 0){
+            return null;
+        }
+
+
 
 
         theModel.addAttribute("id", session.getId());
@@ -72,8 +88,9 @@ public class PaymentController {
 
     }
 
-    @PostMapping("/webhook")
+    @PostMapping("/webhookResponse")
     public JSONObject webhook(){
+        System.out.println("===Webhook Response=====");
         JSONObject webhookResponse = new JSONObject();
         webhookResponse.put("message", "okay");
 

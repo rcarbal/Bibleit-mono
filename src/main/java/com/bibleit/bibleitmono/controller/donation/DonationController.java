@@ -1,8 +1,5 @@
 package com.bibleit.bibleitmono.controller.donation;
 
-import com.bibleit.bibleitmono.payment.PaymentService;
-import com.bibleit.bibleitmono.service.person.PersonService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,12 +7,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class DonationController {
-
-    @Autowired
-    private PersonService personService;
-
-    @Autowired
-    private PaymentService paymentService;
 
     @GetMapping("/donate")
     public String donationInfo(){

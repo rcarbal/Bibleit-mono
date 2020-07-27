@@ -2,22 +2,34 @@ package com.bibleit.bibleitmono.dao.mysql;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Entity
 public class Person {
 
     @Id
-    @GeneratedValue
-    private Integer id;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String firstName;
     private String lastName;
+    private String email;
     private String phoneNumber;
-    private Long amount;
-    private String comment;
+    private String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
-    public Integer getId() {
+    protected Person(){
+    }
+
+    public Person(String firstName, String lastName, String email, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public long getId() {
         return id;
     }
 
@@ -49,20 +61,22 @@ public class Person {
         this.phoneNumber = phoneNumber;
     }
 
-    public Long getAmount() {
-        return amount;
+
+
+    public String getEmail() {
+        return email;
     }
 
-    public void setAmount(Long amount) {
-        this.amount = amount;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getComment() {
-        return comment;
+    public String getTimeStamp() {
+        return timeStamp;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
     }
 
     @Override
@@ -71,9 +85,9 @@ public class Person {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", amount=" + amount +
-                ", comment='" + comment + '\'' +
+                ", timeStamp='" + timeStamp + '\'' +
                 '}';
     }
 }

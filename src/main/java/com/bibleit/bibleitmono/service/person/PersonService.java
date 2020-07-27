@@ -8,7 +8,8 @@ public interface PersonService {
 
     Person findById(int id);
     List<Person> findAll();
-    void save(Person person);
+    Person save(Person person);
     void deleteById(int id);
 
+    int findPerson(String fName, String lName, String email, String phoneN);
 }
