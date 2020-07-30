@@ -1,5 +1,6 @@
 package com.bibleit.bibleitmono.dao.mysql;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -7,6 +8,7 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@Entity
 public class Donation {
 
     @Id
@@ -14,7 +16,7 @@ public class Donation {
     private long id;
     private String sessionId;
     private BigDecimal amount;
-    private String currencyType;
+    private String currency;
     private long personId;
     private String comment;
     private String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
@@ -22,10 +24,10 @@ public class Donation {
 
     protected Donation(){}
 
-    public Donation(String sessionId, BigDecimal amount, String currencyType, long personId, String comment, String timeStamp, String status) {
+    public Donation(String sessionId, BigDecimal amount, String currency, long personId, String comment, String timeStamp, String status) {
         this.sessionId = sessionId;
         this.amount = amount;
-        this.currencyType = currencyType;
+        this.currency = currency;
         this.personId = personId;
         this.comment = comment;
         this.timeStamp = timeStamp;
@@ -56,12 +58,12 @@ public class Donation {
         this.amount = amount;
     }
 
-    public String getCurrencyType() {
-        return currencyType;
+    public String getCurrency() {
+        return currency;
     }
 
-    public void setCurrencyType(String currencyType) {
-        this.currencyType = currencyType;
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
     public long getPersonId() {
@@ -102,7 +104,7 @@ public class Donation {
                 "id=" + id +
                 ", sessionId='" + sessionId + '\'' +
                 ", amount=" + amount +
-                ", currencyType='" + currencyType + '\'' +
+                ", currencyType='" + currency + '\'' +
                 ", personId=" + personId +
                 ", comment='" + comment + '\'' +
                 ", timeStamp='" + timeStamp + '\'' +

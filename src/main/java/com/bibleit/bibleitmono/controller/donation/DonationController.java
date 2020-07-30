@@ -23,7 +23,7 @@ public class DonationController {
                                  @RequestParam String lName,
                                  @RequestParam String email,
                                  @RequestParam String phoneN,
-                                 @RequestParam long amount,
+                                 @RequestParam String amount,
                                  @RequestParam String comment,
                                  Model theModel){
 

@@ -1,9 +1,12 @@
 package com.bibleit.bibleitmono.controller.payment;
 
+import com.bibleit.bibleitmono.dao.mysql.Donation;
 import com.bibleit.bibleitmono.dao.mysql.Person;
+import com.bibleit.bibleitmono.enums.PaymentStatus;
 import com.bibleit.bibleitmono.payment.PaymentService;
 import com.bibleit.bibleitmono.pojo.PaymentResponse;
 import com.bibleit.bibleitmono.pojo.PaymentResponseImpl;
+import com.bibleit.bibleitmono.service.donation.DonationService;
 import com.bibleit.bibleitmono.service.person.PersonService;
 import com.stripe.exception.StripeException;
 import com.stripe.model.checkout.Session;
@@ -15,6 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @RestController
 @RequestMapping("/api/v1/payment")
 public class PaymentController {
@@ -23,6 +30,8 @@ public class PaymentController {
     private PaymentService paymentService;
     @Autowired
     private PersonService personService;
+    @Autowired
+    private DonationService donationService;
 
     @PostMapping("/createPaymentSession")
     public PaymentResponse createSession(@RequestParam String fName,
@@ -35,7 +44,7 @@ public class PaymentController {
         String currency = "usd";
         String productName = "Bible-it Donation";
 
-        Session session = paymentService.getPaymentInformation(currency, productName, amount, email);
+        Session session = paymentService.getPaymentInformation(currency, productName, null, email);
         PaymentResponse paymentResponse = new PaymentResponseImpl();
         paymentResponse.addClientId(session.getId());
         return paymentResponse;
@@ -46,7 +55,7 @@ public class PaymentController {
                                   @RequestParam String lName,
                                   @RequestParam String email,
                                   @RequestParam String phoneN,
-                                  @RequestParam long amount,
+                                  @RequestParam String amount,
                                   @RequestParam String comment,
                                   Model theModel) throws StripeException {
         String currency = "usd";
@@ -57,7 +66,9 @@ public class PaymentController {
         email = email.trim();
         phoneN = phoneN.trim();
 
-        Session session = paymentService.getPaymentInformation(currency, productName, amount, email);
+        Double amountConvt = Double.parseDouble(amount) * 100;
+        Long longAmount = Double.valueOf(amountConvt).longValue();
+        Session session = paymentService.getPaymentInformation(currency, productName, longAmount, email);
         PaymentResponse paymentResponse = new PaymentResponseImpl();
         paymentResponse.addClientId(session.getId());
 
@@ -69,20 +80,18 @@ public class PaymentController {
         if (savedPerson == null){
             return null;
         }
-        else if (person.getId() > 0){
+        else if (person.getId() < 0){
             return null;
         }
+        Donation donation = new Donation(session.getId(),
+                BigDecimal.valueOf(amountConvt),
+                "usd",
+                person.getId(),
+                comment,
+                new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()),
+                PaymentStatus.PENDING.getStatusValue());
 
-
-
-
-        theModel.addAttribute("id", session.getId());
-        theModel.addAttribute("fName", fName);
-        theModel.addAttribute("lName", lName);
-        theModel.addAttribute("email", email);
-        theModel.addAttribute("phoneNumber", phoneN);
-        theModel.addAttribute("amount", amount);
-        theModel.addAttribute("comment", comment);
+        donationService.save(donation);
 
         return session.getId();
 

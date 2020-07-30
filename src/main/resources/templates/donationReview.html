@@ -131,7 +131,7 @@
 
                     donateButton.addEventListener('click', function (event) {
 
-                        axios.post(`/api/donationProcess?fName=${fName.textContent}
+                        axios.post(`/api/v1/payment/processPaymentSession?fName=${fName.textContent}
                             &lName=${lName.textContent}
                             &email=${email.textContent}
                             &phoneN=${phoneN.textContent}

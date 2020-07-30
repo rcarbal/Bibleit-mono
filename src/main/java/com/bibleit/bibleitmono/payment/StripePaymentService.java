@@ -14,7 +14,7 @@ public class StripePaymentService implements PaymentService{
     private Map<String, String> env = System.getenv();
 
     @Override
-    public Session getPaymentInformation(String currency, String donationName, long amount, String email) throws StripeException {
+    public Session getPaymentInformation(String currency, String donationName, Long amount, String email) throws StripeException {
 
         Stripe.apiKey = env.get("STRIPE_TEST_SECRET");
 
