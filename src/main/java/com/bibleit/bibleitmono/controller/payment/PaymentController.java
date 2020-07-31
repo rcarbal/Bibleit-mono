@@ -8,16 +8,16 @@ import com.bibleit.bibleitmono.pojo.PaymentResponse;
 import com.bibleit.bibleitmono.pojo.PaymentResponseImpl;
 import com.bibleit.bibleitmono.service.donation.DonationService;
 import com.bibleit.bibleitmono.service.person.PersonService;
+import com.stripe.exception.SignatureVerificationException;
 import com.stripe.exception.StripeException;
+import com.stripe.model.Event;
 import com.stripe.model.checkout.Session;
-import org.json.simple.JSONObject;
+import com.stripe.net.Webhook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -97,13 +97,20 @@ public class PaymentController {
 
     }
 
-    @PostMapping("/webhookResponse")
-    public JSONObject webhook(){
-        System.out.println("===Webhook Response=====");
-        JSONObject webhookResponse = new JSONObject();
-        webhookResponse.put("message", "okay");
+    @PostMapping("/webhook")
+    public String stripeWebhookEndpoint(@RequestBody String json, HttpServletRequest request) {
+        String header = request.getHeader("Stripe-Signature");
+        String endpointSecret = "your stripe webhook secret";
+        try {
+            Event event = Webhook.constructEvent(json, header, endpointSecret);
+            System.err.println(event);
+        } catch (SignatureVerificationException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        //
+        return "";
 
-        return webhookResponse;
     }
 
 }
