@@ -19,6 +19,11 @@ public class DonationServiceImpl implements DonationService{
     }
 
     @Override
+    public Donation findByIntentId(String id) {
+        return null;
+    }
+
+    @Override
     public List<Donation> findAll() {
         return null;
     }

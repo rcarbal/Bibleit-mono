@@ -10,7 +10,7 @@ import com.bibleit.bibleitmono.service.donation.DonationService;
 import com.bibleit.bibleitmono.service.person.PersonService;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.exception.StripeException;
-import com.stripe.model.Event;
+import com.stripe.model.*;
 import com.stripe.model.checkout.Session;
 import com.stripe.net.Webhook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/payment")
@@ -32,23 +33,6 @@ public class PaymentController {
     private PersonService personService;
     @Autowired
     private DonationService donationService;
-
-    @PostMapping("/createPaymentSession")
-    public PaymentResponse createSession(@RequestParam String fName,
-                                         @RequestParam String lName,
-                                         @RequestParam String email,
-                                         @RequestParam String phoneN,
-                                         @RequestParam long amount,
-                                         @RequestParam String comment) throws StripeException {
-
-        String currency = "usd";
-        String productName = "Bible-it Donation";
-
-        Session session = paymentService.getPaymentInformation(currency, productName, null, email);
-        PaymentResponse paymentResponse = new PaymentResponseImpl();
-        paymentResponse.addClientId(session.getId());
-        return paymentResponse;
-    }
 
     @PostMapping("/processPaymentSession")
     public String donationProcess(@RequestParam String fName,
@@ -70,7 +54,9 @@ public class PaymentController {
         Long longAmount = Double.valueOf(amountConvt).longValue();
         Session session = paymentService.getPaymentInformation(currency, productName, longAmount, email);
         PaymentResponse paymentResponse = new PaymentResponseImpl();
-        paymentResponse.addClientId(session.getId());
+
+        String idToUse = session.getPaymentIntent();
+        paymentResponse.addClientId(idToUse);
 
         // store session id to of donation
         Person person = new Person(fName, lName, email, phoneN);
@@ -83,7 +69,7 @@ public class PaymentController {
         else if (person.getId() < 0){
             return null;
         }
-        Donation donation = new Donation(session.getId(),
+        Donation donation = new Donation(idToUse,
                 BigDecimal.valueOf(amountConvt),
                 "usd",
                 person.getId(),
@@ -100,17 +86,56 @@ public class PaymentController {
     @PostMapping("/webhook")
     public String stripeWebhookEndpoint(@RequestBody String json, HttpServletRequest request) {
         String header = request.getHeader("Stripe-Signature");
-        String endpointSecret = "your stripe webhook secret";
+        String endpointSecret = "whsec_d2rlPs3igrSl6CeaxQKa74Z3zNrJ13DH";
+        Event event = null;
         try {
-            Event event = Webhook.constructEvent(json, header, endpointSecret);
-            System.err.println(event);
+             event = Webhook.constructEvent(json, header, endpointSecret);
+//            System.err.println(event);
         } catch (SignatureVerificationException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        //
+
+        // Deserialize the nested object inside the event
+        EventDataObjectDeserializer dataObjectDeserializer = event.getDataObjectDeserializer();
+        StripeObject stripeObject = null;
+        if (dataObjectDeserializer.getObject().isPresent()) {
+            stripeObject = dataObjectDeserializer.getObject().get();
+        } else {
+            // Deserialization failed, probably due to an API version mismatch.
+            // Refer to the Javadoc documentation on `EventDataObjectDeserializer` for
+            // instructions on how to handle this case, or return an error here.
+        }
+
+        // Handle the event
+        switch (event.getType()) {
+            case "payment_intent.succeeded":
+                PaymentIntent paymentIntent = (PaymentIntent) stripeObject;
+                System.out.println("PaymentIntent was successful!");
+                break;
+            case "payment_method.attached":
+                PaymentMethod paymentMethod = (PaymentMethod) stripeObject;
+                System.out.println("PaymentMethod was attached to a Customer!");
+                break;
+            // ... handle other event types
+            default:
+                // Unexpected event type: response 400
+                return "";
+        }
+
+        // Handle the checkout.session.completed event
+        if ("payment_intent.succeeded".equals(event.getType())) {
+            Optional<StripeObject> object = event.getDataObjectDeserializer().getObject();
+
+            // update database
+            Integer id = Integer.getInteger("");
+            Donation byId = donationService.findById(id);
+        }
         return "";
 
+    }
+    @PostMapping("/test")
+    public String test(){
+        return "ok";
     }
 
 }

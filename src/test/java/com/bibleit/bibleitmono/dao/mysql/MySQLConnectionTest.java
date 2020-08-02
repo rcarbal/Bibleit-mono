@@ -1,5 +1,6 @@
 package com.bibleit.bibleitmono.dao.mysql;
 
+import com.bibleit.bibleitmono.dao.mysql.example.DonationRepository;
 import com.bibleit.bibleitmono.dao.mysql.example.Expense;
 import com.bibleit.bibleitmono.dao.mysql.example.ExpenseRepository;
 import org.junit.jupiter.api.Test;
@@ -8,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 @SpringBootTest
 public class MySQLConnectionTest {
 
@@ -15,6 +18,8 @@ public class MySQLConnectionTest {
     private PersonRepository personRepository;
     @Autowired
     private ExpenseRepository repository;
+    @Autowired
+    private DonationRepository donationRepository;
 
     @Test
     public void testConnection(){
@@ -41,5 +46,11 @@ public class MySQLConnectionTest {
         List<Expense> expensiveItems = repository.listItemsWithPriceOver(200);
         System.out.println("\nExpensive Items: ");
         expensiveItems.forEach(item -> System.out.println(item));
+    }
+
+    @Test
+    public void testIntentId(){
+        Donation donation = donationRepository.findDonationByIntent("cs_test_5cjAFmSqs4Yn4LtWEYUCfQPPPTe8iey7wF4ckz7DSjSBwguSz8I3Cg93");
+        assertNotNull(donation);
     }
 }

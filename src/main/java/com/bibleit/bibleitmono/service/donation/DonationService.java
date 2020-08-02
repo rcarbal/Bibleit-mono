@@ -7,6 +7,7 @@ import java.util.List;
 public interface DonationService {
 
     Donation findById(int id);
+    Donation findByIntentId(String id);
     List<Donation> findAll();
     Donation save(Donation donation);
     void deleteById(int id);
