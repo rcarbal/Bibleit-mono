@@ -19,8 +19,8 @@ public class DonationServiceImpl implements DonationService{
     }
 
     @Override
-    public Donation findByIntentId(String id) {
-        return repository.findDonationByIntent(id);
+    public Donation findByPaymentId(String id) {
+        return repository.findDonationByPaymentIntent(id);
     }
 
     @Override

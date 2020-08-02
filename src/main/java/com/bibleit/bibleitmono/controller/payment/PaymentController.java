@@ -2,6 +2,7 @@ package com.bibleit.bibleitmono.controller.payment;
 
 import com.bibleit.bibleitmono.dao.mysql.Donation;
 import com.bibleit.bibleitmono.dao.mysql.Person;
+import com.bibleit.bibleitmono.enums.CurrencyType;
 import com.bibleit.bibleitmono.enums.PaymentStatus;
 import com.bibleit.bibleitmono.payment.PaymentService;
 import com.bibleit.bibleitmono.pojo.PaymentResponse;
@@ -49,17 +50,25 @@ public class PaymentController {
         email = email.trim();
         phoneN = phoneN.trim();
 
-        Double amountConvt = Double.parseDouble(amount) * 100;
+        double amountConvt = Double.parseDouble(amount) * 100;
         Long longAmount = Double.valueOf(amountConvt).longValue();
         Session session = paymentService.getPaymentInformation(currency, productName, longAmount, email);
         PaymentResponse paymentResponse = new PaymentResponseImpl();
 
-        String idToUse = session.getPaymentIntent();
-        paymentResponse.addClientId(idToUse);
-
         // store session id to of donation
         Person person = new Person(fName, lName, email, phoneN);
         Person savedPerson = personService.save(person);
+
+        String paymentId = session.getPaymentIntent();
+        String sessionId = session.getId();
+        BigDecimal donationAmount = BigDecimal.valueOf(amountConvt);
+        String currencyType = CurrencyType.USD.getValue();
+        long personId = person.getId();
+        String initialDonationCreation = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        String statusAsPending = PaymentStatus.PENDING.getStatusValue();
+
+
+        paymentResponse.addClientId(paymentId);
 
         // TODO person object is not saved in the database
         if (savedPerson == null){
@@ -68,23 +77,24 @@ public class PaymentController {
         else if (person.getId() < 0){
             return null;
         }
-        Donation donation = new Donation(idToUse,
-                BigDecimal.valueOf(amountConvt),
-                "usd",
-                person.getId(),
+        Donation donation = new Donation(
+                paymentId,
+                sessionId,
+                donationAmount,
+                currencyType,
+                personId,
                 comment,
-                new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()),
-                PaymentStatus.PENDING.getStatusValue());
+                initialDonationCreation,
+                statusAsPending);
 
         Donation savedDonation = donationService.save(donation);
         if (savedDonation == null){
-            System.out.printf("Donation not saved to database");
-            return session.getId();
+            System.out.println("Donation not saved to database");
         }
         else{
             System.out.println("Donation saved");
-            return session.getId();
         }
+        return session.getId();
 
     }
 
@@ -135,12 +145,13 @@ public class PaymentController {
             String processedPaymentIntentId = paymentIntent.getId();
             String newTimeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
-            Donation processedDonation = donationService.findByIntentId(processedPaymentIntentId);
+            Donation processedDonation = donationService.findByPaymentId(processedPaymentIntentId);
             processedDonation.setStatus(PaymentStatus.COMPLETE.getStatusValue());
             processedDonation.setTimeStamp(newTimeStamp);
 
             // update database
             Donation save = donationService.save(processedDonation);
+
             if (save.getStatus() == PaymentStatus.COMPLETE.getStatusValue()){
                 System.out.println("donation updated to COMPLETE ***");
             }

@@ -15,6 +15,7 @@ public class Donation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String sessionId;
+    private String paymentId;
     private BigDecimal amount;
     private String currency;
     private long personId;
@@ -24,8 +25,17 @@ public class Donation {
 
     protected Donation(){}
 
-    public Donation(String sessionId, BigDecimal amount, String currency, long personId, String comment, String timeStamp, String status) {
+    public Donation(String paymentId,
+                    String sessionId,
+                    BigDecimal amount,
+                    String currency,
+                    long personId,
+                    String comment,
+                    String timeStamp,
+                    String status) {
+
         this.sessionId = sessionId;
+        this.paymentId = paymentId;
         this.amount = amount;
         this.currency = currency;
         this.personId = personId;
@@ -48,6 +58,14 @@ public class Donation {
 
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
+    }
+
+    public String getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(String paymentId) {
+        this.paymentId = paymentId;
     }
 
     public BigDecimal getAmount() {
@@ -102,7 +120,7 @@ public class Donation {
     public String toString() {
         return "Donation{" +
                 "id=" + id +
-                ", sessionId='" + sessionId + '\'' +
+                ", paymentId='" + paymentId + '\'' +
                 ", amount=" + amount +
                 ", currencyType='" + currency + '\'' +
                 ", personId=" + personId +
