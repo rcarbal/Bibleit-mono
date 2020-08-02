@@ -20,7 +20,7 @@ public class DonationServiceImpl implements DonationService{
 
     @Override
     public Donation findByIntentId(String id) {
-        return null;
+        return repository.findDonationByIntent(id);
     }
 
     @Override

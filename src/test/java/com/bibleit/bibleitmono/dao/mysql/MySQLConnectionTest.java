@@ -50,7 +50,7 @@ public class MySQLConnectionTest {
 
     @Test
     public void testIntentId(){
-        Donation donation = donationRepository.findDonationByIntent("cs_test_5cjAFmSqs4Yn4LtWEYUCfQPPPTe8iey7wF4ckz7DSjSBwguSz8I3Cg93");
+        Donation donation = donationRepository.findDonationByIntent("pi_1HBhHfDfXhzyQLGhyAvZUxKN");
         assertNotNull(donation);
     }
 }

@@ -8,6 +8,7 @@ Monolith application that runs the domain bible-it.com, uses AWS and Spring libr
 - Contains RESTful endpoints to return complete JSON for the NIV bible. 
 - Previews recommended questions based on user input.
 - Presents answer for selected question including supporting verses.
+- Accepts one time payment donations.
 
 ## Implementation
 - Java 11
@@ -16,7 +17,8 @@ Monolith application that runs the domain bible-it.com, uses AWS and Spring libr
 - Connects to AWS using the AWS-JAVA-SDK
 - Parses JSON using Googles' JSON-simple
 - Run in docker container
-- Uses Apache Commons Levenshtein-Distance to mesure string matching
+- Uses Apache Commons Levenshtein-Distance to measure string matching
+- Processes one time payment using Stripe payments and CHECKOUT API
 
 ## Search
 ![search](https://user-images.githubusercontent.com/20021751/87258880-e28a3d80-c45b-11ea-8915-9c254a7ca7c6.png)

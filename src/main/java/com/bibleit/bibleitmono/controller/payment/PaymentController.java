@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/payment")
@@ -77,9 +76,15 @@ public class PaymentController {
                 new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()),
                 PaymentStatus.PENDING.getStatusValue());
 
-        donationService.save(donation);
-
-        return session.getId();
+        Donation savedDonation = donationService.save(donation);
+        if (savedDonation == null){
+            System.out.printf("Donation not saved to database");
+            return session.getId();
+        }
+        else{
+            System.out.println("Donation saved");
+            return session.getId();
+        }
 
     }
 
@@ -124,14 +129,23 @@ public class PaymentController {
 
         // Handle the checkout.session.completed event
         if ("payment_intent.succeeded".equals(event.getType())) {
-            Optional<StripeObject> object = event.getDataObjectDeserializer().getObject();
+
+            PaymentIntent paymentIntent = (PaymentIntent) stripeObject;
+
+            String processedPaymentIntentId = paymentIntent.getId();
+            String newTimeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+
+            Donation processedDonation = donationService.findByIntentId(processedPaymentIntentId);
+            processedDonation.setStatus(PaymentStatus.COMPLETE.getStatusValue());
+            processedDonation.setTimeStamp(newTimeStamp);
 
             // update database
-            Integer id = Integer.getInteger("");
-            Donation byId = donationService.findById(id);
+            Donation save = donationService.save(processedDonation);
+            if (save.getStatus() == PaymentStatus.COMPLETE.getStatusValue()){
+                System.out.println("donation updated to COMPLETE ***");
+            }
         }
         return "";
-
     }
     @PostMapping("/test")
     public String test(){
