@@ -98,6 +98,11 @@ public class PaymentController {
 
     }
 
+    @GetMapping
+    public void getDonationInformationFromSession(@RequestParam String id){
+
+    }
+
     @PostMapping("/webhook")
     public String stripeWebhookEndpoint(@RequestBody String json, HttpServletRequest request) {
         String header = request.getHeader("Stripe-Signature");
