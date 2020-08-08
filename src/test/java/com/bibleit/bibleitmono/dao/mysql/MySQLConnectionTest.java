@@ -53,4 +53,10 @@ public class MySQLConnectionTest {
         Donation donation = donationRepository.findDonationByPaymentIntent("pi_1HBi75DfXhzyQLGhO3U8c1ix");
         assertNotNull(donation);
     }
+
+    @Test
+    public void testSessionId(){
+        Donation donation = donationRepository.findDonationBySessionId("cs_test_RK5uvZEiF3PpIPlI8FK3o829LvOWaFozZ1WyZsvNQQ070cJAgxVlBGZn");
+        assertNotNull(donation);
+    }
 }

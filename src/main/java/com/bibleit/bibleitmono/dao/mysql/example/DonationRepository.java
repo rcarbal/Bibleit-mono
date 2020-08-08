@@ -10,4 +10,7 @@ public interface DonationRepository extends JpaRepository<Donation, Integer> {
     @Query(value="SELECT * FROM bibleitdatabase.donation WHERE payment_id = :id", nativeQuery = true)
     Donation findDonationByPaymentIntent(@Param("id") String id);
 
+    @Query(value="SELECT * FROM bibleitdatabase.donation WHERE session_id = :id", nativeQuery = true)
+    Donation findDonationBySessionId(@Param("id") String id);
+
 }
