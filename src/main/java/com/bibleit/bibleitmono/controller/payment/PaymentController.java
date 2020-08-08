@@ -98,9 +98,9 @@ public class PaymentController {
 
     }
 
-    @GetMapping
-    public void getDonationInformationFromSession(@RequestParam String id){
-
+    @GetMapping("/donationSession")
+    public Donation getDonationInformationFromSession(@RequestParam String id){
+        return donationService.findBySessionId(id);
     }
 
     @PostMapping("/webhook")

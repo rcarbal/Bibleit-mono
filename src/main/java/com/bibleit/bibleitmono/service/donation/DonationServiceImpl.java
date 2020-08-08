@@ -24,6 +24,12 @@ public class DonationServiceImpl implements DonationService{
     }
 
     @Override
+    public Donation findBySessionId(String id) {
+        return repository.findDonationBySessionId(id);
+    }
+
+
+    @Override
     public List<Donation> findAll() {
         return null;
     }

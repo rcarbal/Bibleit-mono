@@ -8,6 +8,7 @@ public interface DonationService {
 
     Donation findById(int id);
     Donation findByPaymentId(String id);
+    Donation findBySessionId(String id);
     List<Donation> findAll();
     Donation save(Donation donation);
     void deleteById(int id);
