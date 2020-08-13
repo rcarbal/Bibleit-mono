@@ -5,6 +5,8 @@ import com.bibleit.bibleitmono.dao.mysql.Person;
 import com.bibleit.bibleitmono.enums.CurrencyType;
 import com.bibleit.bibleitmono.enums.PaymentStatus;
 import com.bibleit.bibleitmono.payment.PaymentService;
+import com.bibleit.bibleitmono.pojo.CompleteDonationInfo;
+import com.bibleit.bibleitmono.pojo.CompleteDonationInfoImpl;
 import com.bibleit.bibleitmono.pojo.PaymentResponse;
 import com.bibleit.bibleitmono.pojo.PaymentResponseImpl;
 import com.bibleit.bibleitmono.service.donation.DonationService;
@@ -63,7 +65,7 @@ public class PaymentController {
         String sessionId = session.getId();
         BigDecimal donationAmount = BigDecimal.valueOf(amountConvt);
         String currencyType = CurrencyType.USD.getValue();
-        long personId = person.getId();
+        int personId = person.getId();
         String initialDonationCreation = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         String statusAsPending = PaymentStatus.PENDING.getStatusValue();
 
@@ -99,8 +101,14 @@ public class PaymentController {
     }
 
     @GetMapping("/donationSession")
-    public Donation getDonationInformationFromSession(@RequestParam String id){
-        return donationService.findBySessionId(id);
+    public CompleteDonationInfo getDonationInformationFromSession(@RequestParam String session_id){
+        Donation donation = donationService.findBySessionId(session_id);
+        Person person = personService.findById(donation.getPersonId());
+
+        CompleteDonationInfo info = new CompleteDonationInfoImpl();
+        info.setPerson(person);
+        info.setDonation(donation);
+        return info;
     }
 
     @PostMapping("/webhook")
@@ -163,7 +171,7 @@ public class PaymentController {
         }
         return "";
     }
-    @PostMapping("/test")
+    @GetMapping("/test")
     public String test(){
         return "ok";
     }

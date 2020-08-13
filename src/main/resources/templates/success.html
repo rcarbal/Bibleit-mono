@@ -10,7 +10,7 @@
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
         </script>
     <title>Bible-it Donation Confirmation</title>
-    <link rel="stylesheet" href="../static/css/success.css">
+    <link rel="stylesheet" type="text/css" th:href="@{css/success.css}" />
 </head>
 
 <body>
@@ -33,8 +33,8 @@
 
                     <div class="col text-right text-success">
                         <h4>
-                            <strong>
-                                COMPLETE
+                            <strong id="status">
+                                N/A
                             </strong>
                         </h4>
                     </div>
@@ -46,8 +46,8 @@
                             <div class="col-3">
                                 <strong>Date:</strong>
                             </div>
-                            <div class="col-md-auto">
-                                08/20/2020
+                            <div class="col-md-auto" id="date">
+                                N/A
                             </div>
                         </div>
                     </li>
@@ -56,8 +56,8 @@
                             <div class="col-3">
                                 <strong>First Name:</strong>
                             </div>
-                            <div class="col-md-auto">
-                                Ricardo
+                            <div class="col-md-auto" id="first_name">
+                                N/A
                             </div>
                         </div>
                     </li>
@@ -66,8 +66,8 @@
                             <div class="col-3">
                                 <strong>Last Name:</strong>
                             </div>
-                            <div class="col-md-auto">
-                                Carballo
+                            <div class="col-md-auto" id="last_name">
+                                N/A
                             </div>
                         </div>
                     </li>
@@ -76,8 +76,8 @@
                             <div class="col-3">
                                 <strong>Phone Number:</strong>
                             </div>
-                            <div class="col-md-auto">
-                                323-273-2833
+                            <div class="col-md-auto" id="phone_number">
+                                N/A
                             </div>
                         </div>
                     </li>
@@ -86,8 +86,8 @@
                             <div class="col-3">
                                 <strong>Email:</strong>
                             </div>
-                            <div class="col-md-auto">
-                                rcarbaleq2@gmail.com
+                            <div class="col-md-auto" id="email">
+                                N/A
                             </div>
                         </div>
                     </li>
@@ -97,7 +97,9 @@
                                 <strong>Amount:</strong>
                             </div>
                             <div class="col-md-auto">
-                                $ <span>200.00</span>
+                                $ <span id="amount">
+                                    N/A
+                                </span>
                             </div>
                         </div>
                     </li>
@@ -106,8 +108,8 @@
                             <div class="col-3">
                                 <strong>Comment:</strong>
                             </div>
-                            <div class="col-md-auto">
-                                Lorem ipsum dolor sit amet.
+                            <div class="col-md-auto" id="comment">
+                                N/A
                             </div>
                         </div>
                     </li>
@@ -116,8 +118,8 @@
                             <div class="col-3">
                                 <strong>BDN:</strong>
                             </div>
-                            <div class="col-md-auto" id="donationNum">
-                                cs_test_RK5uvZEiF3PpIPlI8FK3o829LvOWaFozZ1WyZsvNQQ070cJAgxVlBGZn
+                            <div class="col-md-auto" id="sessionId">
+                                N/A
                             </div>
                         </div>
                     </li>
@@ -140,6 +142,44 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+    <script>
+        let url = window.location.search;
+        let params = new URLSearchParams(url);
+        let dateResponse = document.getElementById("date");
+
+        let status = document.getElementById("status")
+        let firstName = document.getElementById("first_name");
+        let lastName = document.getElementById("last_name");
+        let phoneNumber = document.getElementById("phone_number");
+        let email = document.getElementById("email");
+        let amount = document.getElementById("amount");
+        let comment = document.getElementById("comment");
+        let donationNumber = document.getElementById("sessionId");
+
+
+        axios.get('/api/v1/payment/donationSession?session_id=' + params.get('session_id'))
+            .then((response) => {
+                console.log(response);
+
+                const donation = response.data.donation;
+                const person = response.data.person;
+
+                if (donation.timeStamp) dateResponse.innerHTML = donation.timeStamp;
+                if (donation.comment) comment.innerHTML = donation.comment;
+                if (donation.sessionId) donationNumber.innerHTML = donation.sessionId;
+                if (donation.status){
+                    
+                    status.innerHTML = donation.status.toUpperCase();
+                } 
+                if (donation.amount) amount.innerHTML = `${donation.amount}`;
+                if (person.email) email.innerHTML = person.email;
+                if (person.firstName) firstName.innerHTML = person.firstName;
+                if (person.lastName) lastName.innerHTML = person.lastName;
+                if (person.phoneNumber) phoneNumber.innerHTML = person.phoneNumber;
+            });
+    </script>
 
 </body>
 

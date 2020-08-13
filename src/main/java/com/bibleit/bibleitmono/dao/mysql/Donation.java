@@ -18,7 +18,7 @@ public class Donation {
     private String paymentId;
     private BigDecimal amount;
     private String currency;
-    private long personId;
+    private int personId;
     private String comment;
     private String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
     private String status;
@@ -29,7 +29,7 @@ public class Donation {
                     String sessionId,
                     BigDecimal amount,
                     String currency,
-                    long personId,
+                    int personId,
                     String comment,
                     String timeStamp,
                     String status) {
@@ -84,11 +84,11 @@ public class Donation {
         this.currency = currency;
     }
 
-    public long getPersonId() {
+    public int getPersonId() {
         return personId;
     }
 
-    public void setPersonId(long personId) {
+    public void setPersonId(int personId) {
         this.personId = personId;
     }
 
