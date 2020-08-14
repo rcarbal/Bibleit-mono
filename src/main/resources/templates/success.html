@@ -173,7 +173,11 @@
                     
                     status.innerHTML = donation.status.toUpperCase();
                 } 
-                if (donation.amount) amount.innerHTML = `${donation.amount}`;
+                if (donation.amount){
+                    let amountToConv = donation.amount;
+                    let amountConverted = (amountToConv/100).toFixed(2); 
+                    amount.innerHTML = amountConverted;
+                }
                 if (person.email) email.innerHTML = person.email;
                 if (person.firstName) firstName.innerHTML = person.firstName;
                 if (person.lastName) lastName.innerHTML = person.lastName;
