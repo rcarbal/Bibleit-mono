@@ -5,6 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.DecimalFormat;
+
 @Controller
 public class DonationController {
 
@@ -31,7 +33,21 @@ public class DonationController {
         theModel.addAttribute("lName", lName);
         theModel.addAttribute("email", email);
         theModel.addAttribute("phoneNumber", phoneN);
-        theModel.addAttribute("amount", amount);
+
+        // check if value is a decimal
+        String add$ToAmount = "$";
+        boolean s = amount.contains(".");
+
+        if (!s){
+            DecimalFormat df = new DecimalFormat("0.00");
+            String format = df.format(Long.parseLong(amount));
+            add$ToAmount = add$ToAmount + format;
+
+        }
+        else {
+            add$ToAmount = add$ToAmount + amount;
+        }
+        theModel.addAttribute("amount", add$ToAmount);
         theModel.addAttribute("comment", comment);
 
         return "donationReview";

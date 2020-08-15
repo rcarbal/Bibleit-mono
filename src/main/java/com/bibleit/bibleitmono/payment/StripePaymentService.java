@@ -16,15 +16,15 @@ public class StripePaymentService implements PaymentService{
     @Override
     public Session getPaymentInformation(String currency, String donationName, Long amount, String email) throws StripeException {
 
-        Stripe.apiKey = env.get("STRIPE_TEST_SECRET");
+        Stripe.apiKey = env.get("STRIPE_SECRET_KEY");
 
         SessionCreateParams params =
                 SessionCreateParams.builder()
                         .setCustomerEmail(email)
                         .addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
                         .setMode(SessionCreateParams.Mode.PAYMENT)
-                        .setSuccessUrl("http://localhost:8080/donationSuccess?session_id={CHECKOUT_SESSION_ID}")
-                        .setCancelUrl("http://localhost:8080/")
+                        .setSuccessUrl(env.get("STRIPE_PAYMENT_SUCCESS"))
+                        .setCancelUrl(env.get("STRIPE_PAYMENT_FAILURE"))
                         .addLineItem(
                                 SessionCreateParams.LineItem.builder()
                                         .setQuantity(1L)

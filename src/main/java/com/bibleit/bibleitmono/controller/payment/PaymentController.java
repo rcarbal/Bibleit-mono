@@ -47,12 +47,14 @@ public class PaymentController {
         String currency = "usd";
         String productName = "Bible-it Donation";
 
+        amount = amount.replace("$","");
+
         fName = fName.trim();
         lName = lName.trim();
         email = email.trim();
         phoneN = phoneN.trim();
 
-        double amountConvt = Double.parseDouble(amount) * 100;
+        double amountConvt = Double. parseDouble(amount) * 100;
         Long longAmount = Double.valueOf(amountConvt).longValue();
         Session session = paymentService.getPaymentInformation(currency, productName, longAmount, email);
         PaymentResponse paymentResponse = new PaymentResponseImpl();
