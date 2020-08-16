@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/payment")
@@ -35,6 +36,7 @@ public class PaymentController {
     private PersonService personService;
     @Autowired
     private DonationService donationService;
+    private Map<String, String> env = System.getenv();
 
     @PostMapping("/processPaymentSession")
     public String donationProcess(@RequestParam String fName,
@@ -116,7 +118,7 @@ public class PaymentController {
     @PostMapping("/webhook")
     public String stripeWebhookEndpoint(@RequestBody String json, HttpServletRequest request) {
         String header = request.getHeader("Stripe-Signature");
-        String endpointSecret = "whsec_d2rlPs3igrSl6CeaxQKa74Z3zNrJ13DH";
+        String endpointSecret = env.get("STRIPE_ENDPOINT_SECRET");
         Event event = null;
         try {
              event = Webhook.constructEvent(json, header, endpointSecret);

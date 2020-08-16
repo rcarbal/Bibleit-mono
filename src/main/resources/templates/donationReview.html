@@ -37,28 +37,32 @@
 
                             <strong for="firstName" class="col-sm-3 col-form-label">First Name:</strong>
                             <li class="col-sm-8 list-group-item reviewText"
-                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${fName}" id="firstName"></li>
+                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${fName}"
+                                id="firstName"></li>
                         </div>
 
                         <!-- last name -->
                         <div class="row">
                             <strong for="firstName" class="col-sm-3 col-form-label">Last Name:</strong>
                             <li class="col-sm-8 list-group-item reviewText"
-                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${lName}" id="lastName"></li>
+                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${lName}"
+                                id="lastName"></li>
                         </div>
 
                         <!-- email  -->
                         <div class="row">
                             <strong for="firstName" class="col-sm-3 col-form-label">Email:</strong>
                             <li class="col-sm-8 list-group-item reviewText"
-                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${email}" id="email"></li>
+                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${email}"
+                                id="email"></li>
                         </div>
 
                         <!-- phone number  -->
                         <div class="row">
                             <strong for="firstName" class="col-sm-3 col-form-label">Phone Number:</strong>
                             <li class="col-sm-8 list-group-item reviewText"
-                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${phoneNumber}" id="phone">
+                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${phoneNumber}"
+                                id="phone">
                             </li>
                         </div>
 
@@ -66,14 +70,16 @@
                         <div class="row">
                             <strong for="firstName" class="col-sm-3 col-form-label">Amount:</strong>
                             <li class="col-sm-8 list-group-item reviewText"
-                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${amount}" id="amount"></li>
+                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${amount}"
+                                id="amount"></li>
                         </div>
 
                         <!-- comment  -->
                         <div class="row">
                             <strong for="firstName" class="col-sm-3 col-form-label">Comment:</strong>
                             <li class="col-sm-8 list-group-item reviewText"
-                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${comment}" id="comment">
+                                style="font-family: 'Open Sans', sans-serif; font-size: 1.7em" th:text="${comment}"
+                                id="comment">
                             </li>
                         </div>
                         <!-- submit  -->
@@ -98,54 +104,59 @@
 
                     <div class="col-sm-2"></div>
                 </div>
+            </div>
+            <br>
+            <br>
+        </div>
 
-                <script src="https://js.stripe.com/v3/"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-                    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-                    crossorigin="anonymous"></script>
-                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-                    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-                    crossorigin="anonymous"></script>
-                <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-                <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital@1&display=swap" rel="stylesheet">
 
-                <script>
-                    function goBack() {
-                        window.history.back();
-                    }
-                </script>
+        <script src="https://js.stripe.com/v3/"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital@1&display=swap" rel="stylesheet">
 
-                <!-- <div th:text="${}"></div> -->
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
 
-                <script>
-                    let stripe = Stripe("pk_test_gvpPK104YTOw1IUj773jddt8006MgjFEbN");
-                    let donateButton = document.getElementById("donateButton");
-                    let fName = document.getElementById("firstName");
-                    let lName = document.getElementById("lastName");
-                    let email = document.getElementById("email");
-                    let phoneN = document.getElementById("phone");
-                    let amount = document.getElementById("amount");
-                    let comment = document.getElementById("comment");
+        <!-- <div th:text="${}"></div> -->
 
-                    let sessionId;
+        <script>
+            let stripe = Stripe("pk_live_h996S4kkK6XAXSjq2QuXd7aQ00dWsjH9Py");
+            let donateButton = document.getElementById("donateButton");
+            let fName = document.getElementById("firstName");
+            let lName = document.getElementById("lastName");
+            let email = document.getElementById("email");
+            let phoneN = document.getElementById("phone");
+            let amount = document.getElementById("amount");
+            let comment = document.getElementById("comment");
 
-                    donateButton.addEventListener('click', function (event) {
+            let sessionId;
 
-                        axios.post(`/api/v1/payment/processPaymentSession?fName=${fName.textContent}
+            donateButton.addEventListener('click', function (event) {
+
+                axios.post(`/api/v1/payment/processPaymentSession?fName=${fName.textContent}
                             &lName=${lName.textContent}
                             &email=${email.textContent}
                             &phoneN=${phoneN.textContent}
                             &amount=${amount.textContent}
                             &comment=${comment.textContent}`)
-                            .then((response) => {
-                                sessionId = response.data;
-                                event.preventDefault();
-                                stripe.redirectToCheckout({
-                                    sessionId: sessionId
-                                });
-                            })
-                    });
-                </script>
+                    .then((response) => {
+                        sessionId = response.data;
+                        event.preventDefault();
+                        stripe.redirectToCheckout({
+                            sessionId: sessionId
+                        });
+                    })
+            });
+        </script>
 
     </body>
 
