@@ -12,6 +12,8 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
         </script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" 
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" th:href="@{css/index.css}" />
 </head>
 
@@ -34,7 +36,11 @@
                 <!-- Main column -->
                 <div class="row">
                     <div class="col-2">
-                        <div th:attr="data-voice=${voice}">VOICE</div>
+                        <div class="bottom">
+                            <div th:attr="data-voice=${voice}">
+                                <i class="fa fa-volume-off fa-3x" aria-hidden="true"></i>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-8 justify-content-center text-center">
                         <h1 class="display-4">Bible-It</h1>
