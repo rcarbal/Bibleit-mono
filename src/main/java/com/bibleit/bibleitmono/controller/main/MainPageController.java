@@ -6,8 +6,10 @@ import com.bibleit.bibleitmono.utils.VerseExtractor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MainPageController {
@@ -17,16 +19,18 @@ public class MainPageController {
     private VerseExtractor verseExtractor;
 
     @GetMapping("/")
-    public String root(Model theModel){
+    public String root(@CookieValue(value = "voice", defaultValue = "no")String myVoice,
+                       Model model){
+        model.addAttribute("voice", myVoice);
         return "search";
     }
 
     @GetMapping("question/{id}")
-    public String getQuestion(@PathVariable(value = "id")String id, Model model){
+    public ModelAndView getQuestion(@PathVariable(value = "id")String id, Model model){
 
         QuestionAnswer questionById = questions.getQuestionById(id);
         QuestionAnswer questionWithVerses = verseExtractor.getVerseFromQuestion(questionById);
         model.addAttribute("question", questionWithVerses);
-        return "question";
+        return new ModelAndView("question");
     }
 }

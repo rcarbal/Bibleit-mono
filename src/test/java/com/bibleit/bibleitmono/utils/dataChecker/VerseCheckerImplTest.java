@@ -20,6 +20,5 @@ class VerseCheckerImplTest {
 
         assertTrue(checkedList.size() == 0);
 
-
     }
 }
