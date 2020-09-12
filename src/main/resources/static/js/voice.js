@@ -24,9 +24,14 @@ function changeVoiceIcon(){
     if (voiceIcon.classList.contains("fa-volume-off")){
         voiceIcon.classList = "";
         voiceIcon.classList = ON_ICON;
+
+        document.cookie = "voice=on"
+
     }else{
         voiceIcon.classList = "";
         voiceIcon.classList = OFF_ICON;
+
+        document.cookie = "voice=off"
     }
 }
 
