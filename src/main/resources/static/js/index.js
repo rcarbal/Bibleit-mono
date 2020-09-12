@@ -14,6 +14,7 @@ bibleRef.style.visibility = 'hidden';
 let container = document.getElementById('mainContainer');
 let cardContainer = document.getElementById('cardContainer');
 
+
 function echoWord() {
 
     if (!EVENT_LISTENER_RUNNING) {

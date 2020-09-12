@@ -37,7 +37,7 @@
                 <div class="row">
                     <div class="col-2">
                         <div class="bottom">
-                            <div th:attr="data-voice=${voice}">
+                            <div id="voiceSelected" th:attr="data-voice=${voice}">
                                 <i class="fa fa-volume-off fa-2x" aria-hidden="true"></i>
                             </div>
                         </div>
@@ -98,6 +98,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <script type="text/javascript" th:src="@{/js/index.js}"></script>
+    <script type="text/javascript" th:src="@{/js/voice.js}"></script>
 </body>
 
 </html>
