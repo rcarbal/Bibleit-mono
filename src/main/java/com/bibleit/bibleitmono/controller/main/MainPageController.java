@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 @Controller
 public class MainPageController {
     @Autowired
@@ -19,8 +22,18 @@ public class MainPageController {
     private VerseExtractor verseExtractor;
 
     @GetMapping("/")
-    public String root(@CookieValue(value = "voice", defaultValue = "no")String myVoice,
-                       Model model){
+    public String root(@CookieValue(value = "voice", defaultValue = "default")String myVoice,
+                       Model model,
+                       HttpServletResponse response){
+
+        Cookie cookie = null;
+        if (myVoice.equals("default")){
+            cookie = new Cookie("voice", "off");
+        } else {
+            cookie = new Cookie("voice", myVoice);
+        }
+        //add cookie to response
+        response.addCookie(cookie);
         model.addAttribute("voice", myVoice);
         return "search";
     }
