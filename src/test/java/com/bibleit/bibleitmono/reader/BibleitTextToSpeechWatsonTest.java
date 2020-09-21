@@ -12,4 +12,10 @@ class BibleitTextToSpeechWatsonTest {
         BibleitVoice voices = watson.getVoices();
         System.out.println();
     }
+
+    @Test
+    public void testAuthentication(){
+        BibleitTextToSpeechWatson watson = new BibleitTextToSpeechWatson();
+        watson.sdkManagedTokenAuthentication();
+    }
 }

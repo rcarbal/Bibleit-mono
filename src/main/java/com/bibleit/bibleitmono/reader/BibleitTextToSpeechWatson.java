@@ -21,4 +21,20 @@ public class BibleitTextToSpeechWatson implements BibleitTextToSpeech {
         System.out.println(voices);
         return null;
     }
+
+    @Override
+    public void runSample(){
+
+    }
+//    WATSON_URL
+//    WATSON_API_KEY
+    @Override
+    public void authentication() {
+    }
+
+    public void sdkManagedTokenAuthentication(){
+        IamAuthenticator authenticator = new IamAuthenticator(env.get("WATSON_API_KEY"));
+        TextToSpeech textToSpeech = new TextToSpeech(authenticator);
+        textToSpeech.setServiceUrl(env.get("WATSON_URL"));
+    }
 }
