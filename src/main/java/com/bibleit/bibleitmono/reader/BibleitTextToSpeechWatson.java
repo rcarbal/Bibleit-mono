@@ -1,6 +1,7 @@
 package com.bibleit.bibleitmono.reader;
 
 import com.bibleit.bibleitmono.reader.voice.BibleitVoice;
+import com.ibm.cloud.sdk.core.http.HttpConfigOptions;
 import com.ibm.cloud.sdk.core.security.Authenticator;
 import com.ibm.cloud.sdk.core.security.IamAuthenticator;
 import com.ibm.watson.text_to_speech.v1.TextToSpeech;
@@ -29,12 +30,27 @@ public class BibleitTextToSpeechWatson implements BibleitTextToSpeech {
 //    WATSON_URL
 //    WATSON_API_KEY
     @Override
-    public void authentication() {
+    public Object getTextToSpeechObject() {
+        IamAuthenticator authenticator = getSDKManagedTokenAuthentication();
+        TextToSpeech textToSpeechObject = new TextToSpeech(authenticator);
+        textToSpeechObject.setServiceUrl(env.get("WATSON_URL"));
+
+        return textToSpeechObject;
     }
 
-    public void sdkManagedTokenAuthentication(){
-        IamAuthenticator authenticator = new IamAuthenticator(env.get("WATSON_API_KEY"));
-        TextToSpeech textToSpeech = new TextToSpeech(authenticator);
-        textToSpeech.setServiceUrl(env.get("WATSON_URL"));
+    public IamAuthenticator getSDKManagedTokenAuthentication(){
+
+        return new IamAuthenticator(env.get("WATSON_API_KEY"));
+    }
+
+    public TextToSpeech disableSSLVerification(TextToSpeech textToSpeech){
+
+        HttpConfigOptions configOptions = new HttpConfigOptions.Builder()
+                .disableSslVerification(true)
+                .build();
+
+        textToSpeech.configureClient(configOptions);
+
+        return textToSpeech;
     }
 }

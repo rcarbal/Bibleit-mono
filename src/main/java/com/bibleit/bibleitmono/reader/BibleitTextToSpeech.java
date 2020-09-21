@@ -6,5 +6,5 @@ public interface BibleitTextToSpeech {
 
     BibleitVoice getVoices();
     void runSample();
-    void authentication();
+    Object getTextToSpeechObject();
 }

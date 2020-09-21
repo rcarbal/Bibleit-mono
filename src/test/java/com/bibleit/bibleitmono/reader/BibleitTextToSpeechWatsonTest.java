@@ -2,7 +2,10 @@ package com.bibleit.bibleitmono.reader;
 
 
 import com.bibleit.bibleitmono.reader.voice.BibleitVoice;
+import com.ibm.watson.text_to_speech.v1.TextToSpeech;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class BibleitTextToSpeechWatsonTest {
 
@@ -14,8 +17,9 @@ class BibleitTextToSpeechWatsonTest {
     }
 
     @Test
-    public void testAuthentication(){
+    public void getWatsonTextToSpeechObject(){
         BibleitTextToSpeechWatson watson = new BibleitTextToSpeechWatson();
-        watson.sdkManagedTokenAuthentication();
+        TextToSpeech textToSpeech =  (TextToSpeech) watson.getTextToSpeechObject();
+        assertNotNull(textToSpeech);
     }
 }
