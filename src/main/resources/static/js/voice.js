@@ -63,3 +63,9 @@ function getCookie(cname) {
     return "";
   }
 
+  function getVoiceAudio(answer){
+
+    console.log(answer);
+
+  }
+

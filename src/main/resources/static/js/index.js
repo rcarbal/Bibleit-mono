@@ -23,7 +23,7 @@ function echoWord() {
 
         input = document.getElementById('searchInput');
         previewDiv = document.getElementById('previewDiv');
-        
+
         const inputLength = input.offsetWidth;
         previewDiv.style.width = `${inputLength}px`;
 
@@ -60,25 +60,25 @@ $(document).ready(function () {
         // event.stopPropagation();
         const index = event.target.dataset.index;
 
-        if (typeof index !== "undefined"){
+        if (typeof index !== "undefined") {
             const question = event.target.innerHTML;
 
             // get search and set search bar
             const search = document.getElementById('searchInput');
             search.value = question;
-    
+
             // hide the preview div
             let previewShouldHave = previewDiv.classList.contains("show_pre");
             if (previewShouldHave) {
                 previewDiv.classList.remove("show_pre");
                 backgroundDiv.style.visibility = "hidden";
             }
-    
+
             // remove preview dive child nodes
             if (previewDiv.hasChildNodes()) {
                 previewDiv.innerHTML = "";
             }
-    
+
             // hide preview div
             if (question.split(" ").length) {
                 previewDiv.style.visibility = "hidden";
@@ -119,7 +119,7 @@ function getPreviewQuestion(inputValue) {
                 let previewShouldNotHave = previewDiv.classList.contains("show_pre");
                 if (!previewShouldNotHave) {
                     previewDiv.classList.add("show_pre");
-                    backgroundDiv.style.visibility = "visible";  
+                    backgroundDiv.style.visibility = "visible";
                 }
                 previewDiv.style.visibility = "visible";
 
@@ -131,9 +131,9 @@ function getPreviewQuestion(inputValue) {
             }
 
             EVENT_LISTENER_RUNNING = false;
-        }).catch(function(error) {
+        }).catch(function (error) {
             EVENT_LISTENER_RUNNING = false;   // this is the part you need that catches 400 request
-          });
+        });
 }
 
 
@@ -168,9 +168,9 @@ function getQuestion(index) {
 
         //clear cardContaienr
         cardContainer.innerHTML = "";
-        
+
         // get verses 
-        data.versesList.forEach((verseInfo)=>{
+        data.versesList.forEach((verseInfo) => {
 
             // set card
             let card = document.createElement('div');
@@ -189,12 +189,12 @@ function getQuestion(index) {
             cardContainer.appendChild(card);
 
             let index = 0;
-            
 
-            verseInfo.verses.forEach((info)=> {
+
+            verseInfo.verses.forEach((info) => {
 
                 // set header
-                if (index == 0){
+                if (index == 0) {
                     cardHeader.innerHTML = `${info['book']} ${info['chapter']}`
                 }
 
@@ -218,9 +218,9 @@ function getQuestion(index) {
                 verseContainer.classList.add('mb-3');
 
                 cardBody.appendChild(verseContainer);
-                
+
                 index++
-                
+
             });
         });
 
@@ -234,5 +234,19 @@ function getQuestion(index) {
         answer.innerHTML = data.answer;
         // bibleRef.innerHTML = data.verse;
         // })
+
+        // ATTEMP TO GET RUN VOICE
+        // check updated voice status
+
+        let voiceCookieVal = getCookie("voice");
+        
+        if (voiceCookieVal === "on"){
+
+            getVoiceAudio(data.answer)
+        }
+        
     }
+
+
+
 }

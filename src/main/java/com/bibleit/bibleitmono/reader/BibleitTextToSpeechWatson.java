@@ -38,12 +38,7 @@ public class BibleitTextToSpeechWatson implements BibleitTextToSpeech {
         try {
             SynthesizeOptions synthesizeOptions =
                     new SynthesizeOptions.Builder()
-                            .text("Jesus calls himself the living bread because he has the power of life in him " +
-                                    "and he came from heaven. The Israelite people needed to eat, so God gave them " +
-                                    "manna from heaven in the wilderness, but they still died. It is the same with" +
-                                    " everyone else, they will all hunger eat and die. But Jesus being the true bread " +
-                                    "from heaven with the power of life in him gives eternal life to those who believe " +
-                                    "in him so they will not die.")
+                            .text("hello world")
                             .accept("audio/wav")
                             .voice("en-US_AllisonV3Voice")
                             .build();
