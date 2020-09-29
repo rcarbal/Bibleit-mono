@@ -8,6 +8,7 @@ import com.ibm.watson.text_to_speech.v1.TextToSpeech;
 import com.ibm.watson.text_to_speech.v1.model.SynthesizeOptions;
 import com.ibm.watson.text_to_speech.v1.model.Voices;
 import com.ibm.watson.text_to_speech.v1.util.WaveUtils;
+import org.springframework.stereotype.Component;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,7 +16,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Map;
 
-public class BibleitTextToSpeechWatson implements BibleitTextToSpeech {
+@Component
+public class TextToSpeechServiceWatsonImpl implements TextToSpeechService {
 
     private Map<String, String> env = System.getenv();
 

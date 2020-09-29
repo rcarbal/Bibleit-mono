@@ -66,6 +66,10 @@ function getCookie(cname) {
   function getVoiceAudio(answer){
 
     console.log(answer);
+    axios.get(`/service/voice?answerString=${answer}`)
+      .then((response)=> {
+        console.log(response);
+      });
 
   }
 
