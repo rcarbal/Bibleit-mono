@@ -242,7 +242,7 @@ function getQuestion(index) {
         
         if (voiceCookieVal === "on"){
 
-            getVoiceAudio(data.answer)
+            getVoiceAudio(data.id)
         }
         
     }

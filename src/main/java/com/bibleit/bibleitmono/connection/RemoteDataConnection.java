@@ -8,4 +8,6 @@ public interface RemoteDataConnection {
     QuestionAnswerImpl[] getAllResponse();
 
     boolean setConnection();
+
+    Object getRemoteDataObject(String questinId);
 }

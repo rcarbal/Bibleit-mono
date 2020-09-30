@@ -6,6 +6,7 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.AmazonS3Exception;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.bibleit.bibleitmono.pojo.QuestionAnswerImpl;
@@ -51,5 +52,22 @@ public class S3RemoteDataConnection implements RemoteDataConnection{
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public Object getRemoteDataObject(String questionId) {
+        if (s3client == null ){
+            return null;
+        }
+        S3Object audioFile = null;
+        try {
+            audioFile = s3client.getObject(env.get("S3_BUCKET_NAME"), questionId + ".wav");
+
+        } catch (AmazonS3Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return audioFile;
     }
 }
