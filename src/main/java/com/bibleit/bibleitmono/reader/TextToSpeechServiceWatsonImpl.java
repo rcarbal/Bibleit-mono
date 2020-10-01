@@ -40,9 +40,11 @@ public class TextToSpeechServiceWatsonImpl implements TextToSpeechService {
         try {
             SynthesizeOptions synthesizeOptions =
                     new SynthesizeOptions.Builder()
-                            .text("hello world")
+                            .text("<prosody rate=\"-7%\">" +
+                                    "Jesus Christ's teachings come from his Father who sent him. His Father has placed everything in his hands, and Jesus does what he sees his Father do. For God the Father shows him everything he does." +
+                                    "</prosody>")
                             .accept("audio/wav")
-                            .voice("en-US_AllisonV3Voice")
+                            .voice("en-US_KevinV3Voice")
                             .build();
 
             InputStream inputStream =
