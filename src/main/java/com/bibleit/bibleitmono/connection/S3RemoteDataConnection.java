@@ -1,5 +1,6 @@
 package com.bibleit.bibleitmono.connection;
 
+import com.amazonaws.HttpMethod;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -7,6 +8,7 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.AmazonS3Exception;
+import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.bibleit.bibleitmono.pojo.QuestionAnswerImpl;
@@ -16,6 +18,8 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.net.URL;
+import java.util.Date;
 import java.util.Map;
 
 @Component
@@ -69,5 +73,16 @@ public class S3RemoteDataConnection implements RemoteDataConnection{
         }
 
         return audioFile;
+    }
+
+    @Override
+    public URL getSignedURL(String objectKey, String storageLocationName, Date expirationDate) {
+        GeneratePresignedUrlRequest generatePresignedUrlRequest =
+                new GeneratePresignedUrlRequest(storageLocationName, objectKey)
+                        .withMethod(HttpMethod.GET)
+                        .withExpiration(expirationDate);
+        URL url = s3client.generatePresignedUrl(generatePresignedUrlRequest);
+
+        return url;
     }
 }
