@@ -40,18 +40,20 @@ public class TextToSpeechServiceWatsonImpl implements TextToSpeechService {
         try {
             SynthesizeOptions synthesizeOptions =
                     new SynthesizeOptions.Builder()
-                            .text("<prosody rate=\"-7%\">" +
-                                    "Jesus Christ's teachings come from his Father who sent him. His Father has placed everything in his hands, and Jesus does what he sees his Father do. For God the Father shows him everything he does." +
+                            .text("<prosody rate=\"-20%\">" +
+                                    "Healing a man on the Sabbath day does not break the law of Moses.  " +
+                                    "Jesus Christ compared the approval of circumcising on the Sabbath, so to not " +
+                                    "break the law of Moses, to the approval of healing a man's entire body on the Sabbath" +
                                     "</prosody>")
                             .accept("audio/wav")
-                            .voice("en-US_KevinV3Voice")
+                            .voice("en-US_MichaelV3Voice")
                             .build();
 
             InputStream inputStream =
                     textToSpeech.synthesize(synthesizeOptions).execute().getResult();
             InputStream in = WaveUtils.reWriteWaveHeader(inputStream);
 
-            OutputStream out = new FileOutputStream("hello_world.wav");
+            OutputStream out = new FileOutputStream("sample.wav");
             byte[] buffer = new byte[1024];
             int length;
             while ((length = in.read(buffer)) > 0) {
