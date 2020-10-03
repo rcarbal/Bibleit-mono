@@ -81,8 +81,17 @@ public class S3RemoteDataConnection implements RemoteDataConnection{
                 new GeneratePresignedUrlRequest(storageLocationName, objectKey)
                         .withMethod(HttpMethod.GET)
                         .withExpiration(expirationDate);
-        URL url = s3client.generatePresignedUrl(generatePresignedUrlRequest);
 
+        URL url = null;
+
+        try {
+
+            url = s3client.generatePresignedUrl(generatePresignedUrlRequest);
+
+        } catch (AmazonS3Exception e) {
+            e.printStackTrace();
+            return url;
+        }
         return url;
     }
 }
