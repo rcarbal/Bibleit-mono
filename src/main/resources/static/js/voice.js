@@ -1,6 +1,7 @@
 let playVoiceVar = document.getElementById("voiceSelected");
 let playVoiceVal = playVoiceVar.dataset.voice;
 let voiceIcon = document.getElementById("voiceIcon");
+let voiceAudio;
 
 const OFF_ICON = "fa fa-volume-off fa-2x";
 const ON_ICON = "fa fa-volume-up fa-2x";
@@ -28,7 +29,14 @@ function changeVoiceIcon(){
         voiceIcon.classList = "";
         voiceIcon.classList = OFF_ICON;
 
-        document.cookie = "voice=off"
+        document.cookie = "voice=off";
+        
+        if (voiceAudio == undefined){
+          
+        }else {
+          voiceAudio.pause();
+          voiceAudio.currentTime = 0;
+        }
     }
 }
 
@@ -68,7 +76,7 @@ function getCookie(cname) {
     axios.get(`/api/voice/getAudio?audioId=${audioId}`)
       .then((response)=> {
         console.log(response);
+        voiceAudio = new Audio(response.data);
+        voiceAudio.play();
       });
-
-  }
-
+}

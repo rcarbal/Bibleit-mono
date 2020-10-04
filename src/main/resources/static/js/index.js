@@ -169,7 +169,7 @@ function getQuestion(index) {
         //clear cardContaienr
         cardContainer.innerHTML = "";
 
-        // get verses 
+        // get verses
         data.versesList.forEach((verseInfo) => {
 
             // set card
@@ -242,11 +242,8 @@ function getQuestion(index) {
         
         if (voiceCookieVal === "on"){
 
-            getVoiceAudio(data.id)
-        }
-        
+            // getVoiceAudio("sample");
+            getVoiceAudio(data.id);
+        }        
     }
-
-
-
 }
