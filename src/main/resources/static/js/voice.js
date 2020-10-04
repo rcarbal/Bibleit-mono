@@ -25,12 +25,21 @@ function changeVoiceIcon(){
 
         document.cookie = "voice=on"
 
+        // check if questino needs to be read
+        let questionSeletedId = getCurrentSelectedQuestionId();
+        if (questionSeletedId !== undefined){
+
+          //call voice api
+          getVoiceAudio("sample");
+        }
+
     }else{
         voiceIcon.classList = "";
         voiceIcon.classList = OFF_ICON;
 
         document.cookie = "voice=off";
         
+        //TODO fix if statement.
         if (voiceAudio == undefined){
           
         }else {

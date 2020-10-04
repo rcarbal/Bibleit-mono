@@ -1,5 +1,6 @@
 let EVENT_LISTENER_RUNNING = false;
 let currentResponseData;
+let CURRENT_SELECTED_QUESTION_ID;
 let input = document.getElementById('searchInput');
 let previewDiv = document.getElementById('previewDiv');
 let previewDivHeight = 0;
@@ -232,6 +233,10 @@ function getQuestion(index) {
         bibleRef.innerHTML = "";
 
         answer.innerHTML = data.answer;
+
+        //set the id of the selected question
+        CURRENT_SELECTED_QUESTION_ID = data.id;
+
         // bibleRef.innerHTML = data.verse;
         // })
 
@@ -242,8 +247,12 @@ function getQuestion(index) {
         
         if (voiceCookieVal === "on"){
 
-            // getVoiceAudio("sample");
-            getVoiceAudio(data.id);
+            getVoiceAudio("sample");
+            // getVoiceAudio(data.id);
         }        
     }
+}
+
+function getCurrentSelectedQuestionId(){
+    return CURRENT_SELECTED_QUESTION_ID;
 }
