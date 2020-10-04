@@ -241,18 +241,16 @@ function getQuestion(index) {
         // })
 
         // ATTEMP TO GET RUN VOICE
-        // check updated voice status
-
         let voiceCookieVal = getCookie("voice");
-        
-        if (voiceCookieVal === "on"){
 
-            getVoiceAudio("sample");
-            // getVoiceAudio(data.id);
-        }        
+        if (voiceCookieVal === "on") {
+
+            // getVoiceAudio("sample");
+            getVoiceAudio(data.id);
+        }
     }
 }
 
-function getCurrentSelectedQuestionId(){
+function getCurrentSelectedQuestionId() {
     return CURRENT_SELECTED_QUESTION_ID;
 }

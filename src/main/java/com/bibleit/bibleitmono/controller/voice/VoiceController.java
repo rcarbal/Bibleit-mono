@@ -27,15 +27,23 @@ public class VoiceController {
     private TextToSpeechService voiceService;
 
     @GetMapping("/voice/getAudio")
-    public URL getVoiceAudio(@RequestParam String audioId){
+    public String getVoiceAudio(@RequestParam String audioId){
 
         audioId = audioId + ".wav";
-        String bucketLocation = env.get("S3_BUCKET_NAME");
-        long timeUntilExp = ExpirationTime.FIFTEEN_MINUTES.getExpirationTime();
 
-        Date expDate = GenerateExpDate.getExpirationDate(audioId, bucketLocation, timeUntilExp);
-        URL signedURL = dataConnection.getSignedURL(audioId, bucketLocation, expDate);
+        // check if object exists
+        Object remoteDataObject = dataConnection.getRemoteDataObject(audioId);
 
-        return signedURL;
+        if (remoteDataObject != null){
+            String bucketLocation = env.get("S3_BUCKET_NAME");
+            long timeUntilExp = ExpirationTime.FIFTEEN_MINUTES.getExpirationTime();
+
+            Date expDate = GenerateExpDate.getExpirationDate(audioId, bucketLocation, timeUntilExp);
+            URL signedURL = dataConnection.getSignedURL(audioId, bucketLocation, expDate);
+
+            return signedURL.toString();
+        }
+
+        return "null";
     }
 }
