@@ -65,7 +65,7 @@ public class S3RemoteDataConnection implements RemoteDataConnection{
         }
         S3Object audioFile = null;
         try {
-            audioFile = s3client.getObject(env.get("S3_BUCKET_NAME"), questionId + ".wav");
+            audioFile = s3client.getObject(env.get("S3_BUCKET_NAME"), questionId );
 
         } catch (AmazonS3Exception e) {
             e.printStackTrace();
@@ -77,6 +77,7 @@ public class S3RemoteDataConnection implements RemoteDataConnection{
 
     @Override
     public URL getSignedURL(String objectKey, String storageLocationName, Date expirationDate) {
+
         GeneratePresignedUrlRequest generatePresignedUrlRequest =
                 new GeneratePresignedUrlRequest(storageLocationName, objectKey)
                         .withMethod(HttpMethod.GET)

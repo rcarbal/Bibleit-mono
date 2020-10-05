@@ -31,4 +31,21 @@ class BibleitTextToSpeechWatsonTest {
 
         assertTrue(returnedBoolean);
     }
+
+    @Test
+    public void generateQuestionAnswerAudioFile(){
+
+        TextToSpeechServiceWatsonImpl watson = new TextToSpeechServiceWatsonImpl();
+        String questionId = "611";
+        String answerText ="Do not judge based on appearances, but judge things based on righteousness. ";
+
+        // default
+        // 10% speeds it up 10%
+        // -10% reduces speed 10%
+        String voiceRate = "default";
+        boolean returnedBoolean = watson.generateAudioFile(questionId, answerText, voiceRate);
+
+        assertTrue(returnedBoolean);
+
+    }
 }

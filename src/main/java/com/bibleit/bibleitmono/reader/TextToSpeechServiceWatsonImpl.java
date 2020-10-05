@@ -80,6 +80,44 @@ public class TextToSpeechServiceWatsonImpl implements TextToSpeechService {
         return textToSpeechObject;
     }
 
+    @Override
+    public boolean generateAudioFile(String questionId, String answerText, String voiceRate) {
+        IamAuthenticator authenticator = new IamAuthenticator(env.get("WATSON_API_KEY"));
+        TextToSpeech textToSpeech = new TextToSpeech(authenticator);
+        textToSpeech.setServiceUrl(env.get("WATSON_URL"));
+
+        try {
+            SynthesizeOptions synthesizeOptions =
+                    new SynthesizeOptions.Builder()
+                            .text("<prosody rate=\""+ voiceRate +"\">" +
+                                    answerText +
+                                    "</prosody>")
+                            .accept("audio/wav")
+                            .voice("en-US_MichaelV3Voice")
+                            .build();
+
+            InputStream inputStream =
+                    textToSpeech.synthesize(synthesizeOptions).execute().getResult();
+            InputStream in = WaveUtils.reWriteWaveHeader(inputStream);
+
+            OutputStream out = new FileOutputStream("audios/"+questionId + ".wav");
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = in.read(buffer)) > 0) {
+                out.write(buffer, 0, length);
+            }
+
+            out.close();
+            in.close();
+            inputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+
     public IamAuthenticator getSDKManagedTokenAuthentication(){
         return new IamAuthenticator(env.get("WATSON_API_KEY"));
     }
