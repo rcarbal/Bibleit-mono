@@ -1,8 +1,8 @@
 package com.bibleit.bibleitmono.controller.backendAPI.voice;
 
-import com.bibleit.bibleitmono.connection.RemoteDataConnection;
+import com.bibleit.bibleitmono.repository.connection.RemoteDataConnection;
 import com.bibleit.bibleitmono.enums.ExpirationTime;
-import com.bibleit.bibleitmono.reader.TextToSpeechService;
+import com.bibleit.bibleitmono.service.reader.TextToSpeechService;
 import com.bibleit.bibleitmono.utils.GenerateExpDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

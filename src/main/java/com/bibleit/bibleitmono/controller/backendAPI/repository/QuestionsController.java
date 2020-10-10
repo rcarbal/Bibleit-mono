@@ -1,6 +1,6 @@
 package com.bibleit.bibleitmono.controller.backendAPI.repository;
 
-import com.bibleit.bibleitmono.question.QuestionRetrievalService;
+import com.bibleit.bibleitmono.service.question.QuestionRetrievalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

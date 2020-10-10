@@ -1,6 +1,6 @@
 package com.bibleit.bibleitmono.dao;
 
-import com.bibleit.bibleitmono.connection.RemoteDataConnection;
+import com.bibleit.bibleitmono.repository.connection.RemoteDataConnection;
 import com.bibleit.bibleitmono.pojo.QuestionAnswer;
 import com.bibleit.bibleitmono.pojo.QuestionAnswerImpl;
 import org.springframework.beans.factory.annotation.Autowired;

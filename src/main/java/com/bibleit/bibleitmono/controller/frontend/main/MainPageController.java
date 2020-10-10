@@ -1,7 +1,7 @@
 package com.bibleit.bibleitmono.controller.frontend.main;
 
 import com.bibleit.bibleitmono.pojo.QuestionAnswer;
-import com.bibleit.bibleitmono.question.QuestionRetrievalService;
+import com.bibleit.bibleitmono.service.question.QuestionRetrievalService;
 import com.bibleit.bibleitmono.utils.VerseExtractor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

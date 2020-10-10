@@ -4,7 +4,7 @@ import com.bibleit.bibleitmono.dao.mysql.Donation;
 import com.bibleit.bibleitmono.dao.mysql.Person;
 import com.bibleit.bibleitmono.enums.CurrencyType;
 import com.bibleit.bibleitmono.enums.PaymentStatus;
-import com.bibleit.bibleitmono.payment.PaymentService;
+import com.bibleit.bibleitmono.service.payment.PaymentService;
 import com.bibleit.bibleitmono.pojo.CompleteDonationInfo;
 import com.bibleit.bibleitmono.pojo.CompleteDonationInfoImpl;
 import com.bibleit.bibleitmono.pojo.PaymentResponse;

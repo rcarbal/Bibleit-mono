@@ -2,7 +2,7 @@ package com.bibleit.bibleitmono.controller.backendAPI.search;
 
 import com.bibleit.bibleitmono.enums.QuestionType;
 import com.bibleit.bibleitmono.pojo.QuestionAnswer;
-import com.bibleit.bibleitmono.search.SearchService;
+import com.bibleit.bibleitmono.service.search.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
