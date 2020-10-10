@@ -1,4 +1,4 @@
-package com.bibleit.bibleitmono.controller.payment;
+package com.bibleit.bibleitmono.controller.backendAPI.payment;
 
 import com.bibleit.bibleitmono.dao.mysql.Donation;
 import com.bibleit.bibleitmono.dao.mysql.Person;

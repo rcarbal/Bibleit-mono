@@ -1,4 +1,4 @@
-package com.bibleit.bibleitmono.controller.repository;
+package com.bibleit.bibleitmono.controller.backendAPI.repository;
 
 import com.bibleit.bibleitmono.question.QuestionRetrievalService;
 import org.springframework.beans.factory.annotation.Autowired;

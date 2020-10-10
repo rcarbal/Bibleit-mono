@@ -1,4 +1,4 @@
-package com.bibleit.bibleitmono.controller.search;
+package com.bibleit.bibleitmono.controller.backendAPI.search;
 
 import com.bibleit.bibleitmono.enums.QuestionType;
 import com.bibleit.bibleitmono.pojo.QuestionAnswer;

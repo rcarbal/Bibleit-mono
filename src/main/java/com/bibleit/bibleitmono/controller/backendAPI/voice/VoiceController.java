@@ -1,4 +1,4 @@
-package com.bibleit.bibleitmono.controller.voice;
+package com.bibleit.bibleitmono.controller.backendAPI.voice;
 
 import com.bibleit.bibleitmono.connection.RemoteDataConnection;
 import com.bibleit.bibleitmono.enums.ExpirationTime;

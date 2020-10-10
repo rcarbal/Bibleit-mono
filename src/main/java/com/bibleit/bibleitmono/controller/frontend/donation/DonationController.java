@@ -1,4 +1,4 @@
-package com.bibleit.bibleitmono.controller.donation;
+package com.bibleit.bibleitmono.controller.frontend.donation;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

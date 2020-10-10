@@ -1,4 +1,4 @@
-package com.bibleit.bibleitmono.controller.main;
+package com.bibleit.bibleitmono.controller.frontend.main;
 
 import com.bibleit.bibleitmono.pojo.QuestionAnswer;
 import com.bibleit.bibleitmono.question.QuestionRetrievalService;
