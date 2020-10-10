@@ -68,8 +68,8 @@ public class S3RemoteDataConnection implements RemoteDataConnection{
             audioFile = s3client.getObject(env.get("S3_BUCKET_NAME"), questionId );
 
         } catch (AmazonS3Exception e) {
-            e.printStackTrace();
-            return null;
+//            e.printStackTrace();
+            System.out.println("No Audio Found for the question: " + questionId);
         }
 
         return audioFile;
@@ -90,8 +90,9 @@ public class S3RemoteDataConnection implements RemoteDataConnection{
             url = s3client.generatePresignedUrl(generatePresignedUrlRequest);
 
         } catch (AmazonS3Exception e) {
-            e.printStackTrace();
-            return url;
+//            e.printStackTrace();
+            System.out.println("No Audio Found for the question: " + objectKey);
+            return null;
         }
         return url;
     }
