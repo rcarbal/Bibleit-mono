@@ -1,4 +1,4 @@
-package com.bibleit.bibleitmono.repository.remover;
+package com.bibleit.bibleitmono.service.remover;
 
 import com.bibleit.bibleitmono.pojo.QuestionAnswer;
 import org.springframework.stereotype.Component;

@@ -5,7 +5,7 @@ import com.bibleit.bibleitmono.enums.QuestionType;
 import com.bibleit.bibleitmono.pojo.QuestionAnswer;
 import com.bibleit.bibleitmono.pojo.QuestionAnswerImpl;
 import com.bibleit.bibleitmono.service.question.QuestionRetrievalService;
-import com.bibleit.bibleitmono.repository.remover.ElementRemover;
+import com.bibleit.bibleitmono.service.remover.ElementRemover;
 import com.bibleit.bibleitmono.service.sorting.AlgorithmService;
 import com.bibleit.bibleitmono.utils.VerseExtractor;
 import com.bibleit.bibleitmono.utils.dataChecker.VerseChecker;
