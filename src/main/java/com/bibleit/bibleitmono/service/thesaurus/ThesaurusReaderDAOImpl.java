@@ -1,5 +1,7 @@
 package com.bibleit.bibleitmono.service.thesaurus;
 
+import com.bibleit.bibleitmono.enums.WordPos;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.springframework.core.io.ClassPathResource;
@@ -36,11 +38,8 @@ public class ThesaurusReaderDAOImpl implements ThesaurusReaderDAO {
                         thesaurusData.put(jsonObject.get("key").getAsString(), jsonObject);
 
                         counter++;
-                        System.out.print(counter + " " + "extracted");
                     }
                 }
-
-                System.out.println("Thesaurus Extraction complese");
             }
 
         } catch (IOException e) {
@@ -50,8 +49,6 @@ public class ThesaurusReaderDAOImpl implements ThesaurusReaderDAO {
                 scanner.close();
             }
         }
-
-
     }
 
 
@@ -66,7 +63,23 @@ public class ThesaurusReaderDAOImpl implements ThesaurusReaderDAO {
     }
 
     @Override
-    public void getWordSynonyms() {
+    public JsonArray getAllSynonymsOfWord(String word) {
+        JsonArray synonyms = new JsonArray();
 
+        // find all occurrences of a word
+        int index = 1;
+
+        while (thesaurusData.containsKey(word + "_" + index)){
+
+            String key = word + "_" + index;
+            JsonObject allWordInfo = thesaurusData.get(key);
+            JsonArray extractedSynonyms = (JsonArray) allWordInfo.get(WordPos.SYNONYMS.getPosValue());
+
+            synonyms.addAll(extractedSynonyms);
+
+            index++;
+        }
+
+        return synonyms;
     }
 }
