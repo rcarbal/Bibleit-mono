@@ -1,9 +1,10 @@
 package com.bibleit.bibleitmono.service.thesaurus;
 
 import com.bibleit.bibleitmono.enums.WordPos;
+import com.bibleit.bibleitmono.utils.StringUtils;
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
@@ -32,7 +33,8 @@ public class ThesaurusReaderDAOImpl implements ThesaurusReaderDAO {
 
                 while (scanner.hasNextLine()){
                     String params = scanner.nextLine();
-                    JsonObject jsonObject = JsonParser.parseString(params).getAsJsonObject();
+//                    JsonObject jsonObject = JsonParser.parseString(params).getAsJsonObject();
+                    JsonObject jsonObject = new Gson().fromJson(params, JsonObject.class);
 
                     if (jsonObject.get("key") != null){
                         thesaurusData.put(jsonObject.get("key").getAsString(), jsonObject);
@@ -74,6 +76,31 @@ public class ThesaurusReaderDAOImpl implements ThesaurusReaderDAO {
             String key = word + "_" + index;
             JsonObject allWordInfo = thesaurusData.get(key);
             JsonArray extractedSynonyms = (JsonArray) allWordInfo.get(WordPos.SYNONYMS.getPosValue());
+
+            synonyms.addAll(extractedSynonyms);
+
+            index++;
+        }
+
+        return synonyms;
+    }
+
+    public JsonArray getAllSynonymsOfWord(String word, String synonymFormat) {
+        JsonArray synonyms = new JsonArray();
+
+        // find all occurrences of a word
+        int index = 1;
+
+        while (thesaurusData.containsKey(word + "_" + index)){
+
+            String key = word + "_" + index;
+            JsonObject allWordInfo = thesaurusData.get(key);
+            JsonArray extractedSynonyms = (JsonArray) allWordInfo.get(WordPos.SYNONYMS.getPosValue());
+
+            // check if synonyms have multiple words
+            if (synonymFormat.equals(WordPos.SINGLE.getPosValue())){
+                StringUtils.removeSynsMultipleWords(extractedSynonyms);
+            }
 
             synonyms.addAll(extractedSynonyms);
 

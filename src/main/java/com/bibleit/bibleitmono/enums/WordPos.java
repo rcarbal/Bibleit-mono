@@ -4,7 +4,8 @@ public enum WordPos {
     NOUN("noun"),
     VERB("verb"),
     ADJECTIVE("adj"),
-    SYNONYMS("synonyms");
+    SYNONYMS("synonyms"),
+    SINGLE("single");
 
     private String pendingValue;
 
