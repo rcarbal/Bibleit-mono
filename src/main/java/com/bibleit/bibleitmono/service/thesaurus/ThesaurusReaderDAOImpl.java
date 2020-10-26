@@ -85,6 +85,7 @@ public class ThesaurusReaderDAOImpl implements ThesaurusReaderDAO {
         return synonyms;
     }
 
+    @Override
     public JsonArray getAllSynonymsOfWord(String word, String synonymFormat) {
         JsonArray synonyms = new JsonArray();
 
@@ -99,11 +100,9 @@ public class ThesaurusReaderDAOImpl implements ThesaurusReaderDAO {
 
             // check if synonyms have multiple words
             if (synonymFormat.equals(WordPos.SINGLE.getPosValue())){
-                StringUtils.removeSynsMultipleWords(extractedSynonyms);
+                JsonArray array = StringUtils.removeSynsMultipleWords(extractedSynonyms);
+                synonyms.addAll(array);
             }
-
-            synonyms.addAll(extractedSynonyms);
-
             index++;
         }
 

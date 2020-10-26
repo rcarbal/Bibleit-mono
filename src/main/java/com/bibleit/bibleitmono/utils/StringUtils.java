@@ -17,10 +17,21 @@ public class StringUtils {
         
     }
 
-    public static void removeSynsMultipleWords(JsonArray extractedSynonyms) {
+    public static JsonArray removeSynsMultipleWords(JsonArray extractedSynonyms) {
+
+        JsonArray array = new JsonArray();
+
         for (JsonElement element : extractedSynonyms){
-            String a = element.getAsString();
-            System.out.println();
+            String synonymString = element.getAsString();
+            String[] synonymArray = synonymString.split("\\W+");
+
+            //remove multi-word synonyms
+            if (synonymArray.length > 1){
+                continue;
+            }
+            array.add(synonymString);
         }
+
+        return array;
     }
 }

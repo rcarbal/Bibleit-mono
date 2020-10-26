@@ -34,9 +34,11 @@ class ThesaurusReaderDAOImplTest {
     @Test
     public void getWordSynonymsSingleType(){
         ThesaurusReaderDAOImpl thesaurus = new ThesaurusReaderDAOImpl();
-        String word = "dog";
+        String word = "sin";
         String synonymType = WordPos.SINGLE.getPosValue();
         JsonArray arrayOfSynonyms = thesaurus.getAllSynonymsOfWord(word, synonymType);
+
+        System.out.println(arrayOfSynonyms);
 
         assertTrue(arrayOfSynonyms.size() > 0);
     }
