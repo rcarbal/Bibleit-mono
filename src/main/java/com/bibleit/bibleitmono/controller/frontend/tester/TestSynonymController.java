@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class TestSynonymController {
     @GetMapping("/testSyns")
     public String testSynonyms(){
+
+
+
         return "synonymSearch";
     }
 }

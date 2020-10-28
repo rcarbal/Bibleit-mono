@@ -15,6 +15,11 @@ public class SearchApiController {
     @Autowired
     private SearchService search;
 
+    @GetMapping("search/test")
+    public String test(){
+        return "API SEARCH RESPONSE";
+    }
+
     @GetMapping("/search")
     public List<QuestionAnswer> getSearch(@RequestParam String userInput){
         List<QuestionAnswer> result = search.getBestMatched(userInput, QuestionType.QUESTION);
