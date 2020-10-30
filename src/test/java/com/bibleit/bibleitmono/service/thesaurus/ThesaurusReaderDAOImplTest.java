@@ -25,7 +25,7 @@ class ThesaurusReaderDAOImplTest {
     @Test
     public void getWordSynonyms(){
         ThesaurusReaderDAOImpl thesaurus = new ThesaurusReaderDAOImpl();
-        String word = "god";
+        String word = "the";
         JsonArray arrayOfSynonyms = thesaurus.getAllSynonymsOfWord(word);
 
         assertTrue(arrayOfSynonyms.size() > 0);
@@ -41,6 +41,11 @@ class ThesaurusReaderDAOImplTest {
         System.out.println(arrayOfSynonyms);
 
         assertTrue(arrayOfSynonyms.size() > 0);
+    }
+
+    @Test
+    public void generateSentencesWithSynonyms(){
+
     }
 
 

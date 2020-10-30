@@ -73,6 +73,15 @@ public class LevenshteinCompareImpl implements KeywordSimilarityMatcher {
         return scoredArr.toArray(new QuestionAnswer[0]);
     }
 
+    @Override
+    public void getExactMatch(QuestionAnswerImpl[] questions, String userString, QuestionType questionType) {
+        //loop through all the questions
+        for (QuestionAnswer question: questions){
+            System.out.println();
+        }
+
+    }
+
     private double getScoreByIndex(int x, int y) {
         int returnedScore = 0;
 
