@@ -1,6 +1,7 @@
 package com.bibleit.bibleitmono.service.thesaurus;
 
 
+import com.bibleit.bibleitmono.dao.thesaurus.ThesaurusReaderDAOImpl;
 import com.bibleit.bibleitmono.enums.WordPos;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

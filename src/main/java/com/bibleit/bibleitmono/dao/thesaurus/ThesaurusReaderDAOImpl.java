@@ -1,4 +1,4 @@
-package com.bibleit.bibleitmono.service.thesaurus;
+package com.bibleit.bibleitmono.dao.thesaurus;
 
 import com.bibleit.bibleitmono.enums.WordPos;
 import com.bibleit.bibleitmono.utils.StringUtils;

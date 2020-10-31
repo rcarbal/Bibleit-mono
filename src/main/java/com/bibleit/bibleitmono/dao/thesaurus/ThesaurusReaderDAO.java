@@ -1,4 +1,4 @@
-package com.bibleit.bibleitmono.service.thesaurus;
+package com.bibleit.bibleitmono.dao.thesaurus;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
