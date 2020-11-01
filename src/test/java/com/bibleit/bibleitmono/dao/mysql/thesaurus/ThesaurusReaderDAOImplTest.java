@@ -1,4 +1,4 @@
-package com.bibleit.bibleitmono.service.thesaurus;
+package com.bibleit.bibleitmono.dao.mysql.thesaurus;
 
 
 import com.bibleit.bibleitmono.dao.thesaurus.ThesaurusReaderDAOImpl;

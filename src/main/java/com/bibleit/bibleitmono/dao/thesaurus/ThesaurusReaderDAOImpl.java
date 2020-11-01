@@ -7,6 +7,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+@Component
 public class ThesaurusReaderDAOImpl implements ThesaurusReaderDAO {
 
     private static Map<String, JsonObject> thesaurusData = new HashMap<>();

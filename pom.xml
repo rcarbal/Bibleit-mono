@@ -109,6 +109,14 @@
 			<version>8.6.0</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+
+
 
 	</dependencies>
 
@@ -117,6 +125,18 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+<!--			compile to java 10 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<target>10</target>
+					<source>10</source>
+					<release>10</release>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
