@@ -3,10 +3,13 @@ package com.bibleit.bibleitmono.dao.mysql.thesaurus;
 
 import com.bibleit.bibleitmono.dao.thesaurus.ThesaurusReaderDAOImpl;
 import com.bibleit.bibleitmono.enums.WordPos;
+import com.bibleit.bibleitmono.service.generator.SentenceGeneratorService;
+import com.bibleit.bibleitmono.service.generator.SentenceGeneratorServiceImpl;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -46,6 +49,14 @@ class ThesaurusReaderDAOImplTest {
 
     @Test
     public void generateSentencesWithSynonyms(){
+        String sampleSentence = "";
+        ThesaurusReaderDAOImpl thesaurus = new ThesaurusReaderDAOImpl();
+        SentenceGeneratorService sentenceGenerator = new SentenceGeneratorServiceImpl();
+
+        Map<String, JsonArray> sentenceSynonyms = thesaurus.getSynonymsOfString(sampleSentence);
+        List<String> listOfSentences =  sentenceGenerator.getSentences(sentenceSynonyms);
+
+        assertTrue(listOfSentences.size() > 0);
 
     }
 

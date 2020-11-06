@@ -12,4 +12,5 @@ public interface ThesaurusReaderDAO {
     JsonArray getAllSynonymsOfWord(String word);
     JsonArray getAllSynonymsOfWord(String word, String synonymFormat);
 
+    Map<String, JsonArray> getSynonymsOfString(String sampleSentence);
 }

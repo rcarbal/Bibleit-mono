@@ -110,4 +110,9 @@ public class ThesaurusReaderDAOImpl implements ThesaurusReaderDAO {
 
         return synonyms;
     }
+
+    @Override
+    public Map<String, JsonArray> getSynonymsOfString(String sampleSentence) {
+        return null;
+    }
 }
